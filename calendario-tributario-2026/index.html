@@ -79,7 +79,7 @@ var RUB=[[2,2],[5,4],[8,3],[11,3]];
 function D(y,m,d){return new Date(y,m-1,d);}
 function dix(d){return d===0?9:d-1;}
 function gix(d){return d===0?4:Math.floor((d-1)/2);}
-function ult(nit){var s=String(nit).replace(/D/g,'');var n2=parseInt(s.slice(-2)||'0',10);return {d:n2%10,n2:n2,vv:n2===0?100:n2};}
+function ult(nit){var s=String(nit).replace(/\D/g,'');var n2=parseInt(s.slice(-2)||'0',10);return {d:n2%10,n2:n2,vv:n2===0?100:n2};}
 function pnFecha(vv){var p=Math.ceil(vv/2)-1;if(p<13)return D(2026,8,PN_AUG[p]);if(p<33)return D(2026,9,PN_SEP[p-13]);return D(2026,10,PN_OCT[p-33]);}
 function exPn(vv){var g=Math.floor((vv-1)/5);return D(2026,EX_PJPN[g][0],EX_PJPN[g][1]);}
 
@@ -164,7 +164,7 @@ function filasCsv(res){
 }
 v('f').addEventListener('submit',function(e){
   e.preventDefault();
-  var msg=v('msg'),out=v('out'),txt=v('nit').value.replace(/D/g,'');
+  var msg=v('msg'),out=v('out'),txt=v('nit').value.replace(/\D/g,'');
   if(!txt){msg.textContent='Escribe tu NIT con cifras, sin dígito de verificación.';out.innerHTML='';ultimo=null;v('csv').disabled=true;return;}
   var o=leer();
   msg.textContent='';
