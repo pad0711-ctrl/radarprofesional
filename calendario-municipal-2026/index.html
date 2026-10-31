@@ -32,6 +32,7 @@
 <fieldset><legend>Obligaciones de Medellín</legend><div class="checks">
 <label><input type="checkbox" id="m_ret"> Retención en la fuente de ICA (ReteICA)</label>
 <label><input type="checkbox" id="m_aut"> Autorretención en la fuente de ICA</label>
+<label><input type="checkbox" id="m_exo"> Información exógena distrital de ICA y terceros (medios magnéticos)</label>
 </div></fieldset>
 </div>
 
@@ -43,11 +44,11 @@
 <div class="actions"><button id="csv" class="alt" type="button" disabled>Descargar resultado (Excel)</button></div>
 
 <h2>Qué cubre y qué no</h2>
-<p>Bogotá: ICA en régimen común (bimestral o anual) y preferencial, retención de ICA e información exógena distrital, cuyo calendario se define por el último dígito del NIT. Medellín: ICA en régimen ordinario y simplificado, retención y autorretención de ICA.</p>
-<p>No cubre todavía: en Bogotá, la autorretención de ICA y los demás tributos distritales (predial, vehículos, sobretasas, estampillas, delineación, cerveza y cigarrillos). En Medellín, la información exógena, que no encontramos en una fuente municipal oficial, y los demás tributos municipales. El calendario nacional está en su propia página.</p>
+<p>Bogotá: ICA en régimen común (bimestral o anual) y preferencial, retención de ICA e información exógena distrital, cuyo calendario se define por el último dígito del NIT. Medellín: ICA en régimen ordinario y simplificado, retención y autorretención de ICA, e información exógena de ICA y terceros (arts. 1 a 9 de la Res. 202550093499).</p>
+<p>No cubre todavía: en Bogotá, la autorretención de ICA y los demás tributos distritales (predial, vehículos, sobretasas, estampillas, delineación, cerveza y cigarrillos). En Medellín, las exógenas de gasolina, telefonía, alumbrado, espectáculos, publicidad exterior visual y contratos públicos, y los demás tributos municipales. El calendario nacional está en su propia página.</p>
 
 <h2>Cómo se leen las fechas</h2>
-<p>Bogotá, ICA y retención: Resolución SDH-000195 del 12 de diciembre de 2025, expedida por la Secretaría Distrital de Hacienda para el año gravable 2026. Bogotá, información exógena: Resolución DDI-042682 del 19 de octubre de 2026, que modifica el artículo 28 de la Resolución DDI-024115; el calendario definitivo es del 26 de octubre al 5 de noviembre de 2026. Medellín: Calendario Tributario 2026 adoptado con la Resolución 202550100057 del 9 de diciembre de 2025. Para Medellín, la declaración anual de ICA depende del último dígito del NIT, y así lo muestra la herramienta.</p>
+<p>Bogotá, ICA y retención: Resolución SDH-000195 del 12 de diciembre de 2025, expedida por la Secretaría Distrital de Hacienda para el año gravable 2026. Bogotá, información exógena: Resolución DDI-042682 del 19 de octubre de 2026, que modifica el artículo 28 de la Resolución DDI-024115; el calendario definitivo es del 26 de octubre al 5 de noviembre de 2026. Medellín: Calendario Tributario 2026 adoptado con la Resolución 202550100057 del 9 de diciembre de 2025; información exógena de 2025 con la Resolución 202550093499 del 13 de noviembre de 2025. Para Medellín, la declaración anual de ICA depende del último dígito del NIT, y así lo muestra la herramienta.</p>
 
 <div class="action"><h3>Antes de declarar</h3><p>Esta herramienta es orientativa. No reemplaza el acto administrativo vigente ni la fecha que aparezca en tu factura o declaración. Confirma en la Secretaría de Hacienda de tu ciudad antes de presentar o pagar. Si tienes dudas sobre tu caso, consulta con tu contador o revisor fiscal.</p></div>
 
@@ -65,6 +66,7 @@ var MED_RETE=[[3,18],[5,20],[7,22],[9,23],[11,18],[1,20,2027]];
 var MED_AUT=[[3,18],[5,20],[7,22],[9,23],[11,18],[12,21]];
 var BOG_ICA_BIM=[[4,10],[6,12],[8,21],[10,9],[12,11],[2,12,2027]];
 var BOG_RETE=[[3,20],[5,22],[7,17],[9,18],[11,20],[1,15,2027]];
+var MED_EXO={0:[8,18],1:[8,3],2:[8,4],3:[8,5],4:[8,6],5:[8,10],6:[8,11],7:[8,12],8:[8,13],9:[8,14]};
 var BOG_EXO={0:[10,26],1:[10,26],2:[10,27],3:[10,27],4:[10,28],5:[10,29],6:[10,30],7:[11,3],8:[11,4],9:[11,5]};
 
 function D(a){return a.length===3?new Date(a[2],a[0]-1,a[1]):new Date(2026,a[0]-1,a[1]);}
@@ -89,6 +91,7 @@ function calcular(nitStr,o){
     else MED_ICA_SIMP.forEach(function(r,i){out.push(fila(D(r),'ICA · pago régimen simplificado','Bimestre '+(i+1),'Régimen simplificado',Mf+', p. 4','Medellín'));});
     if(o.mret) MED_RETE.forEach(function(r,i){out.push(fila(D(r),'Retención de ICA · declaración y pago','Periodo '+MES_BIM[i],'',Mf+', p. 4','Medellín'));});
     if(o.maut) MED_AUT.forEach(function(r,i){out.push(fila(D(r),'Autorretención de ICA · declaración y pago','Periodo '+MES_BIM[i],'',Mf+', p. 4','Medellín'));});
+    if(o.mexo) out.push(fila(D(MED_EXO[d]),'Información exógena distrital de ICA y terceros (arts. 1 a 9)','Periodo gravable 2025','Fecha según el último dígito del NIT (art. 21); ya vencida para todos los dígitos','Resolución 202550093499 del 13 nov 2025, art. 21','Medellín'));
   }
   out.sort(function(a,b){if(!a.f)return 1;if(!b.f)return -1;return a.f-b.f;});
   return {n2:n2,digito:d,obligaciones:out};
@@ -97,7 +100,7 @@ window.CAL_MUN={calcular:calcular};
 
 function leer(){
   var c=v('ciudad').value;
-  return {ciudad:c,bica:v('b_ica').value,ret:ck('b_ret'),exo:ck('b_exo'),mica:v('m_ica').value,mret:ck('m_ret'),maut:ck('m_aut')};
+  return {ciudad:c,bica:v('b_ica').value,ret:ck('b_ret'),exo:ck('b_exo'),mica:v('m_ica').value,mret:ck('m_ret'),maut:ck('m_aut'),mexo:ck('m_exo')};
 }
 function actualizar(){
   var c=v('ciudad').value;
