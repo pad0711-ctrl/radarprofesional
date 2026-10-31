@@ -556,14 +556,14 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 </footer>
 
 <script>
-const newsCards = [...document.querySelectorAll('#novedades .news-card')];
+const newsCards = [...document.querySelectorAll('#novedades .news-card, .hero .feature, .hero-side .news-card')];
 let selectedTopic = 'Todos';
 const input = document.getElementById('news-search');
 const norm = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
 function filterNews() {
   const q = norm(input.value);
-  let n = 0;
+  let n = 0, total = 0;
 
   newsCards.forEach(c => {
     const show =
@@ -571,15 +571,18 @@ function filterNews() {
       norm(c.dataset.search).includes(q);
 
     c.hidden = !show;
-    if (show) n++;
+    if (show) {
+      total++;
+      if (c.closest('#novedades')) n++;
+    }
   });
 
   document.getElementById('result-count').textContent =
     n + (n === 1 ? ' noticia disponible' : ' noticias disponibles');
 
-  document.getElementById('empty-state').hidden = n > 0;
+  document.getElementById('empty-state').hidden = total > 0;
   document.querySelector('.hero').hidden =
-    selectedTopic !== 'Todos' || q.length > 0;
+    !newsCards.some(c => c.closest('.hero') && !c.hidden);
 }
 
 input.addEventListener('input', filterNews);
