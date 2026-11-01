@@ -56,15 +56,10 @@ h1{font:700 clamp(32px,4vw,48px)/1.15 Georgia,serif;letter-spacing:-1px;margin:9
 .meta{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .tag{color:var(--teal);font-weight:800;text-transform:uppercase;letter-spacing:.7px}
 .read-more{font-size:14px;font-weight:700}
-.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:30px}
 .section-heading{border-bottom:2px solid var(--ink);padding-bottom:10px;margin:0 0 18px;font-size:23px}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .cards .news-card{padding:23px}
 .cards .news-card p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.side-panel{background:#eaf2f3;border:1px solid #d4e3e4;border-radius:8px;padding:22px;margin-bottom:24px}
-.side-panel h2{font-size:20px;margin:0 0 12px}
-.side-panel p{font-size:14px;color:var(--muted)}
-.deadline{font-size:25px;font-weight:800;color:var(--teal);display:block}
 .archive{padding:38px 0}
 .archive details{border:1px solid var(--line);background:white;border-radius:7px;margin:12px 0;padding:18px}
 .archive summary{font-weight:700;cursor:pointer}
@@ -99,8 +94,6 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 @media(max-width:850px){
   .hero{grid-template-columns:1fr}
   .hero-side{grid-template-columns:1fr 1fr}
-  .content-grid{grid-template-columns:1fr}
-  .sidebar{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .mast{flex-wrap:wrap}
   .feature h2{font-size:30px}
 }
@@ -109,7 +102,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
   .mast nav{gap:14px;flex-wrap:wrap}
   .searchbar{flex-wrap:wrap}
   .searchbar input{width:100%}
-  .hero-side,.cards,.sidebar{grid-template-columns:1fr}
+  .hero-side,.cards{grid-template-columns:1fr}
   .feature{padding:25px}
   .feature h2{font-size:28px}
   .hero{gap:16px}
@@ -433,20 +426,6 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 
       <p class="empty" id="empty-state" hidden>No hay publicaciones para esta búsqueda. Prueba otro tema o palabra.</p>
     </section>
-
-    <aside class="sidebar">
-      <section class="side-panel">
-        <h2>Próximos vencimientos</h2>
-        <span class="deadline">26 octubre–5 noviembre</span>
-        <p>Información exógena de Bogotá, año 2025. La fecha depende del último dígito de identificación.</p>
-        <a href="/actualidad/bogota-exogena-2025-2026-09-26/">Consultar la nota y las fuentes →</a>
-      </section>
-      <section class="side-panel">
-        <h2>Fuentes a la vista</h2>
-        <p>Cada noticia identifica su fuente y diferencia normas, proyectos, interpretaciones y recordatorios.</p>
-        <a href="#criterio">Conocer el criterio editorial</a>
-      </section>
-    </aside>
   </div>
 
   <span id="bitacora"></span>
