@@ -11,8 +11,10 @@ Uso:
 import json
 import re
 import sys
+from datetime import date, datetime, timedelta
 from html import escape
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 RAIZ = Path(__file__).resolve().parent.parent
 INDEX = RAIZ / "index.html"
@@ -58,6 +60,32 @@ def fecha_movimiento(meta):
     return max(fechas)
 
 
+ZONA = ZoneInfo("America/Bogota")
+DIAS_PLAZO_VENCIDO = 7
+
+
+def hoy_bogota():
+    return datetime.now(ZONA).date()
+
+
+def fecha_corta(d):
+    mes = next(k for k, v in MESES.items() if v == d.month)
+    return f"{d.day} {mes} {d.year}"
+
+
+def etiqueta_plazo(n, hoy):
+    """'Plazo: D mes AAAA' hasta el día de vencimiento; 'Plazo vencido: ...' durante
+    los 7 días siguientes; después no se muestra."""
+    if not n.get("vence"):
+        return None
+    vence = date.fromisoformat(n["vence"])
+    if hoy <= vence:
+        return f"Plazo: {fecha_corta(vence)}"
+    if hoy <= vence + timedelta(days=DIAS_PLAZO_VENCIDO):
+        return f"Plazo vencido: {fecha_corta(vence)}"
+    return None
+
+
 def validar(notas):
     hrefs = [url_absoluta(n["href"]) for n in notas]
     if len(hrefs) != len(set(hrefs)):
@@ -69,6 +97,11 @@ def validar(notas):
             if campo not in n:
                 raise ValueError(f"Falta '{campo}' en {n['href']}")
         fecha_movimiento(n["meta"])
+        if "vence" in n:
+            try:
+                date.fromisoformat(n["vence"])
+            except ValueError:
+                raise ValueError(f"'vence' debe ser AAAA-MM-DD en {n['href']}")
         if n.get("portada") not in (None, "destacada", "lateral"):
             raise ValueError(f"'portada' inválida en {n['href']}")
     if sum(1 for n in notas if n.get("portada") == "destacada") != 1:
@@ -77,13 +110,17 @@ def validar(notas):
         raise ValueError("Debe haber exactamente dos notas con portada 'lateral'")
 
 
-def tarjeta(n, sangria, clase, encabezado):
+def tarjeta(n, sangria, clase, encabezado, hoy=None):
     i = " " * sangria
+    hoy = hoy or hoy_bogota()
     lineas = [f'{i}<div class="{clase}" data-topic="{atributo(n["tema"])}" data-search="{atributo(n["buscar"])}">',
               f'{i}  <div class="meta">']
     if n.get("tag"):
         lineas.append(f'{i}    <span class="tag">{texto(n["tag"])}</span>')
     lineas += [f'{i}    <span>{texto(parte)}</span>' for parte in n["meta"].split(SEPARADOR)]
+    plazo = etiqueta_plazo(n, hoy)
+    if plazo:
+        lineas.append(f'{i}    <span class="plazo">{texto(plazo)}</span>')
     lineas += [f'{i}  </div>',
                f'{i}  <{encabezado}><a href="{atributo(n["href"])}">{texto(n["titulo"])}</a></{encabezado}>',
                f'{i}  <p>{texto(n["resumen"])}</p>',
@@ -125,13 +162,13 @@ def render_sitemap(notas, herramientas):
     return "\n".join(lineas) + "\n"
 
 
-def render_portada(notas):
+def render_portada(notas, hoy=None):
     destacada = next(n for n in notas if n.get("portada") == "destacada")
     laterales = [n for n in notas if n.get("portada") == "lateral"]
     return ('  <section class="hero" aria-label="Noticias destacadas">\n'
-            + tarjeta(destacada, 4, "feature", "h2") + "\n\n"
+            + tarjeta(destacada, 4, "feature", "h2", hoy) + "\n\n"
             + '    <div class="hero-side">\n'
-            + "\n\n".join(tarjeta(n, 6, "news-card", "h3") for n in laterales) + "\n"
+            + "\n\n".join(tarjeta(n, 6, "news-card", "h3", hoy) for n in laterales) + "\n"
             + "    </div>\n"
             + "  </section>")
 
@@ -142,8 +179,8 @@ def ordenar_lo_ultimo(notas):
     return sorted(resto, key=lambda n: fecha_movimiento(n["meta"]), reverse=True)
 
 
-def render_lo_ultimo(notas):
-    return "\n\n".join(tarjeta(n, 8, "news-card", "h3") for n in ordenar_lo_ultimo(notas))
+def render_lo_ultimo(notas, hoy=None):
+    return "\n\n".join(tarjeta(n, 8, "news-card", "h3", hoy) for n in ordenar_lo_ultimo(notas))
 
 
 def render_archivo(notas):
@@ -194,11 +231,12 @@ def cargar_herramientas():
     return herramientas
 
 
-def generar(html, notas, herramientas=None):
+def generar(html, notas, herramientas=None, hoy=None):
     if herramientas is None:
         herramientas = cargar_herramientas()
-    html = reemplazar_bloque(html, "portada", render_portada(notas))
-    html = reemplazar_bloque(html, "lo-ultimo", render_lo_ultimo(notas))
+    hoy = hoy or hoy_bogota()
+    html = reemplazar_bloque(html, "portada", render_portada(notas, hoy))
+    html = reemplazar_bloque(html, "lo-ultimo", render_lo_ultimo(notas, hoy))
     html = reemplazar_bloque(html, "herramientas", render_herramientas(herramientas))
     return reemplazar_archivo_y_contador(html, render_archivo(notas), len(notas))
 

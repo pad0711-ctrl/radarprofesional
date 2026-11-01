@@ -10,6 +10,8 @@ on:
       - "data/**"
       - "scripts/**"
       - "tests/**"
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -33,9 +35,11 @@ jobs:
         run: python3 -I -m unittest discover -s tests -v
 
       - name: Regenerar index.html y sitemap.xml
+        if: github.event_name != 'pull_request'
         run: python3 scripts/generar_archivo.py
 
       - name: Guardar cambios si los hay
+        if: github.event_name != 'pull_request'
         run: |
           if git diff --quiet -- index.html sitemap.xml; then
             echo "Sin cambios: index.html y sitemap.xml ya coinciden con data/."
