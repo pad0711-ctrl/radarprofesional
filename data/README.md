@@ -19,6 +19,7 @@ Campos de cada nota:
 - `buscar`: texto del buscador (`data-search`). Obligatorio.
 - `resumen`: párrafo de la tarjeta. Obligatorio.
 - `portada`: `"destacada"` (una nota) o `"lateral"` (dos notas). Las demás van a "Lo último", ordenadas por la fecha de movimiento más reciente.
+- `vence` (opcional, AAAA-MM-DD): fecha límite de un plazo. La tarjeta muestra "Plazo: D mes AAAA" hasta ese día, "Plazo vencido: ..." durante 7 días después, y luego no muestra nada. La fecha se calcula con la hora de Bogotá cuando corre el workflow.
 
 Pruebas del script:
 
@@ -32,4 +33,4 @@ Qué regenera el script:
 
 No editar esas partes a mano en index.html ni sitemap.xml: el script las sobrescribe.
 
-Automatización: el workflow `.github/workflows/regenerar-sitio.yml` corre las pruebas y el script en cada cambio de `data/`, `scripts/` o `tests/` en main, y todos los días a las 6:00 a. m. (Bogotá). Si el resultado cambia, hace commit de index.html y sitemap.xml directo en main. Hoy el resultado solo depende de los datos, así que la corrida diaria no cambia nada hasta que se agregue una regla por fecha (por ejemplo, marcar plazos vencidos).
+Automatización: el workflow `.github/workflows/regenerar-sitio.yml` corre las pruebas y el script en cada cambio de `data/`, `scripts/` o `tests/` en main, y todos los días a las 6:00 a. m. (Bogotá). Si el resultado cambia, hace commit de index.html y sitemap.xml directo en main. Las etiquetas de plazo cambian con la fecha, así que la corrida diaria actualiza la portada y "Lo último" cuando un plazo entra en "vencido" o sale de la vista. Las corridas en pull requests solo ejecutan las pruebas.

@@ -6,6 +6,7 @@ import copy
 import json
 import sys
 import unittest
+from datetime import date
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -76,13 +77,11 @@ class Duplicados(unittest.TestCase):
 
 
 class IndexActual(unittest.TestCase):
-    def test_generar_sobre_index_actual_no_cambia_nada(self):
-        self.assertEqual(g.generar(INDEX_HTML, NOTAS), INDEX_HTML)
-
-
-if __name__ == "__main__":
-    unittest.main()
-
+    def test_generar_es_idempotente(self):
+        hoy = date(2026, 11, 1)
+        una_vez = g.generar(INDEX_HTML, NOTAS, HERRAMIENTAS, hoy=hoy)
+        otra_vez = g.generar(una_vez, NOTAS, HERRAMIENTAS, hoy=hoy)
+        self.assertEqual(una_vez, otra_vez)
 
 class Herramientas(unittest.TestCase):
     def test_render_incluye_enlaces_y_descripcion(self):
@@ -125,3 +124,38 @@ class Sitemap(unittest.TestCase):
         with self.assertRaises(ValueError):
             g.render_sitemap(NOTAS, herr)
 
+
+class Plazos(unittest.TestCase):
+    NOTA = {"vence": "2026-11-05"}
+
+    def test_antes_y_el_dia_del_vencimiento(self):
+        self.assertEqual(g.etiqueta_plazo(self.NOTA, date(2026, 11, 1)), "Plazo: 5 noviembre 2026")
+        self.assertEqual(g.etiqueta_plazo(self.NOTA, date(2026, 11, 5)), "Plazo: 5 noviembre 2026")
+
+    def test_vencido_durante_siete_dias(self):
+        self.assertEqual(g.etiqueta_plazo(self.NOTA, date(2026, 11, 6)), "Plazo vencido: 5 noviembre 2026")
+        self.assertEqual(g.etiqueta_plazo(self.NOTA, date(2026, 11, 12)), "Plazo vencido: 5 noviembre 2026")
+
+    def test_despues_de_siete_dias_no_se_muestra(self):
+        self.assertIsNone(g.etiqueta_plazo(self.NOTA, date(2026, 11, 13)))
+
+    def test_nota_sin_vence_no_tiene_etiqueta(self):
+        self.assertIsNone(g.etiqueta_plazo({}, date(2026, 11, 1)))
+
+    def test_tarjeta_muestra_la_etiqueta(self):
+        n = dict(NOTAS[0], vence="2026-11-05")
+        self.assertIn('<span class="plazo">Plazo vencido: 5 noviembre 2026</span>',
+                      g.tarjeta(n, 0, "news-card", "h3", date(2026, 11, 6)))
+
+    def test_fecha_vence_invalida_falla(self):
+        n = [dict(NOTAS[0], vence="5/11/2026")] + NOTAS[1:]
+        with self.assertRaises(ValueError):
+            g.validar(n)
+
+    def test_los_cuatro_plazos_estan_en_los_datos(self):
+        con_plazo = [n["href"] for n in NOTAS if "vence" in n]
+        self.assertEqual(len(con_plazo), 4)
+
+
+if __name__ == "__main__":
+    unittest.main()
