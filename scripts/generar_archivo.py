@@ -1,5 +1,5 @@
 """Regenera desde data/ las partes automáticas del sitio:
-- index.html: la portada destacada (BEGIN/END:portada), la lista "Lo último"
+- index.html: la portada de próximos vencimientos (BEGIN/END:portada), la lista "Lo último"
   (BEGIN/END:lo-ultimo), el panel Herramientas (BEGIN/END:herramientas), el archivo de
   publicaciones y el contador de noticias.
 - sitemap.xml: home, herramientas y todas las notas.
@@ -102,12 +102,6 @@ def validar(notas):
                 date.fromisoformat(n["vence"])
             except ValueError:
                 raise ValueError(f"'vence' debe ser AAAA-MM-DD en {n['href']}")
-        if n.get("portada") not in (None, "destacada", "lateral"):
-            raise ValueError(f"'portada' inválida en {n['href']}")
-    if sum(1 for n in notas if n.get("portada") == "destacada") != 1:
-        raise ValueError("Debe haber exactamente una nota con portada 'destacada'")
-    if sum(1 for n in notas if n.get("portada") == "lateral") != 2:
-        raise ValueError("Debe haber exactamente dos notas con portada 'lateral'")
 
 
 def tarjeta(n, sangria, clase, encabezado, hoy=None):
@@ -162,25 +156,47 @@ def render_sitemap(notas, herramientas):
     return "\n".join(lineas) + "\n"
 
 
+def fecha_larga(d):
+    mes = next(k for k, v in MESES.items() if v == d.month)
+    return f"{d.day} de {mes} de {d.year}"
+
+
+def vencimientos_abiertos(notas, hoy):
+    """Notas con 'vence' igual o posterior a hoy, por fecha límite y, en empate, por fecha
+    de movimiento más reciente."""
+    abiertas = [n for n in notas if n.get("vence") and date.fromisoformat(n["vence"]) >= hoy]
+    abiertas.sort(key=lambda n: fecha_movimiento(n["meta"]), reverse=True)
+    abiertas.sort(key=lambda n: date.fromisoformat(n["vence"]))  # estable: conserva el desempate
+    return abiertas
+
+
 def render_portada(notas, hoy=None):
-    destacada = next(n for n in notas if n.get("portada") == "destacada")
-    laterales = [n for n in notas if n.get("portada") == "lateral"]
-    return ('  <section class="hero" aria-label="Noticias destacadas">\n'
-            + tarjeta(destacada, 4, "feature", "h2", hoy) + "\n\n"
-            + '    <div class="hero-side">\n'
-            + "\n\n".join(tarjeta(n, 6, "news-card", "h3", hoy) for n in laterales) + "\n"
-            + "    </div>\n"
-            + "  </section>")
+    hoy = hoy or hoy_bogota()
+    cabecera = ('  <section class="agenda" aria-labelledby="agenda-titulo">\n'
+                '    <h2 id="agenda-titulo" class="section-heading">Próximos vencimientos</h2>\n')
+    items = vencimientos_abiertos(notas, hoy)
+    if not items:
+        cuerpo = ('    <p class="agenda-vacia">No hay plazos abiertos en este momento. '
+                  '<a href="/calendario-tributario-2026/">Consulta el calendario tributario 2026</a>.</p>\n')
+    else:
+        lis = "".join(
+            f'      <li><time datetime="{n["vence"]}">{fecha_larga(date.fromisoformat(n["vence"]))}</time>'
+            f'<a href="{atributo(n["href"])}">{texto(n["titulo"])}</a></li>\n' for n in items)
+        cuerpo = f'    <ol class="agenda-list">\n{lis}    </ol>\n'
+    return cabecera + cuerpo + "  </section>"
 
 
-def ordenar_lo_ultimo(notas):
-    # Orden estable: a igual fecha, se conserva el orden de data/articulos.json.
-    resto = [n for n in notas if not n.get("portada")]
+def ordenar_lo_ultimo(notas, hoy=None):
+    """Notas que no están en 'Próximos vencimientos', por fecha de movimiento más reciente."""
+    hoy = hoy or hoy_bogota()
+    en_agenda = {n["href"] for n in vencimientos_abiertos(notas, hoy)}
+    resto = [n for n in notas if n["href"] not in en_agenda]
     return sorted(resto, key=lambda n: fecha_movimiento(n["meta"]), reverse=True)
 
 
 def render_lo_ultimo(notas, hoy=None):
-    return "\n\n".join(tarjeta(n, 8, "news-card", "h3", hoy) for n in ordenar_lo_ultimo(notas))
+    hoy = hoy or hoy_bogota()
+    return "\n\n".join(tarjeta(n, 8, "news-card", "h3", hoy) for n in ordenar_lo_ultimo(notas, hoy))
 
 
 def render_archivo(notas):

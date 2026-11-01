@@ -38,6 +38,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{o
 h1{font:700 clamp(32px,4vw,48px)/1.15 Georgia,serif;letter-spacing:-1px;margin:9px 0 12px}
 .intro p{color:var(--muted);margin:0}
 .hero{display:grid;grid-template-columns:1.6fr 1fr;gap:22px;margin:24px 0 40px}
+.agenda{margin:24px 0 40px}
+.agenda-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.agenda-list li{background:white;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:9px;padding:14px 18px;display:grid;gap:4px;overflow-wrap:anywhere}
+.agenda-list time{font-size:13px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.5px}
+.agenda-list a{color:var(--ink);font-weight:700;font-size:17px;line-height:1.35;text-decoration:none}
+.agenda-list a:hover{color:var(--teal)}
+.agenda-vacia{color:var(--muted)}
 .feature,.news-card{background:white;border:1px solid var(--line);border-radius:9px;padding:26px;position:relative}
 .feature{border-top:4px solid var(--teal);padding:34px}
 .feature h2{font:700 34px/1.22 Georgia,serif;margin:17px 0}
@@ -160,43 +167,15 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
   </section>
 
   <!-- BEGIN:portada -->
-  <section class="hero" aria-label="Noticias destacadas">
-    <div class="feature" data-topic="Impuestos" data-search="Bogotá cambia el calendario de información exógena: vencimientos del 26 de octubre al 5 de noviembre Bogotá · Información exógena">
-      <div class="meta">
-        <span class="tag">Impuestos</span>
-        <span>Fecha de la fuente: 19 octubre 2026 (Resolución DDI-042682)</span>
-        <span>Publicada en el sitio: 26 septiembre 2026</span>
-        <span>Actualizada en el sitio: 21 octubre 2026</span>
-        <span class="plazo">Plazo: 5 noviembre 2026</span>
-      </div>
-      <h2><a href="/actualidad/bogota-exogena-2025-2026-09-26/">Bogotá cambia el calendario de información exógena: vencimientos del 26 de octubre al 5 de noviembre</a></h2>
-      <p>La Resolución DDI-042682 del 19 de octubre de 2026 modifica el artículo 28 de la Resolución DDI-024115. El calendario de entrega de información exógena distrital pasa al periodo del 26 de octubre al 5 de noviembre de 2026, según el último dígito de identificación.</p>
-      <a class="read-more" href="/actualidad/bogota-exogena-2025-2026-09-26/">Leer noticia →</a>
-    </div>
-
-    <div class="hero-side">
-      <div class="news-card" data-topic="Economía" data-search="DANE registra una leve caída de la actividad económica en agosto: qué revisar desde finanzas y auditoría Finanzas y análisis económico">
-        <div class="meta">
-          <span class="tag">Economía</span>
-          <span>Fecha de la fuente: 19 octubre 2026</span>
-          <span>Publicada en el sitio: 21 octubre 2026</span>
-        </div>
-        <h3><a href="https://radarprofesional.online/actualidad/dane-ise-agosto-2026-actividad-economica/">DANE registra una leve caída de la actividad económica en agosto: qué revisar desde finanzas y auditoría</a></h3>
-        <p>El DANE publicó el 19 de octubre los resultados preliminares del Indicador de Seguimiento a la Economía (ISE) correspondientes a agosto de 2026.</p>
-        <a class="read-more" href="https://radarprofesional.online/actualidad/dane-ise-agosto-2026-actividad-economica/">Leer noticia →</a>
-      </div>
-
-      <div class="news-card" data-topic="Impuestos" data-search="DIAN revisó facturación en BogotáEats: lecciones de control para comercios y auditores Tributación y control fiscal">
-        <div class="meta">
-          <span class="tag">Impuestos</span>
-          <span>Fecha de la fuente: 20 octubre 2026</span>
-          <span>Publicada en el sitio: 21 octubre 2026</span>
-        </div>
-        <h3><a href="https://radarprofesional.online/actualidad/dian-bogotaeats-control-facturacion-electronica-2026/">DIAN revisó facturación en BogotáEats: lecciones de control para comercios y auditores</a></h3>
-        <p>La DIAN informó el 20 de octubre que realizó verificaciones de factura electrónica y documento equivalente electrónico durante BogotáEats a Cielo Abierto, celebrado los días 16 y 17 de octubre de 2026.</p>
-        <a class="read-more" href="https://radarprofesional.online/actualidad/dian-bogotaeats-control-facturacion-electronica-2026/">Leer noticia →</a>
-      </div>
-    </div>
+  <section class="agenda" aria-labelledby="agenda-titulo">
+    <h2 id="agenda-titulo" class="section-heading">Próximos vencimientos</h2>
+    <ol class="agenda-list">
+      <li><time datetime="2026-11-05">5 de noviembre de 2026</time><a href="https://radarprofesional.online/actualidad/mincit-antidumping-laminado-india-2026/">Antidumping al laminado decorativo de India: el MinCIT prorroga el plazo para responder cuestionarios</a></li>
+      <li><time datetime="2026-11-05">5 de noviembre de 2026</time><a href="/actualidad/bogota-exogena-2025-2026-09-26/">Bogotá cambia el calendario de información exógena: vencimientos del 26 de octubre al 5 de noviembre</a></li>
+      <li><time datetime="2026-11-13">13 de noviembre de 2026</time><a href="https://radarprofesional.online/actualidad/decreto-1226-2026-plazos-renta-sismo/">Decreto 1226 de 2026: plazos de renta por el terremoto del 10 de agosto</a></li>
+      <li><time datetime="2026-11-19">19 de noviembre de 2026</time><a href="https://radarprofesional.online/actualidad/decreto-1419-2026-emergencia-terremoto/">Decreto 1419 de 2026: alivios tributarios tras el terremoto del 10 de agosto</a></li>
+      <li><time datetime="2026-11-19">19 de noviembre de 2026</time><a href="/actualidad/dian-sanciones-cambiarias-decreto-1419-2026/">DIAN precisa el procedimiento para pagar el 15 % de sanciones por obligaciones cambiarias incumplidas</a></li>
+    </ol>
   </section>
   <!-- END:portada -->
 
@@ -207,18 +186,6 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 
       <div class="cards">
         <!-- BEGIN:lo-ultimo -->
-        <div class="news-card" data-topic="Impuestos" data-search="decreto 1226 2026 renta personas naturales sismo terremoto plazos NIT seccionales Cali Pereira Armenia Manizales Popayán Quibdó Tuluá Palmira Buenaventura retención julio">
-          <div class="meta">
-            <span class="tag">Impuestos</span>
-            <span>Fecha de la fuente: 18 agosto 2026</span>
-            <span>Publicada en el sitio: 1 noviembre 2026</span>
-            <span class="plazo">Plazo: 13 noviembre 2026</span>
-          </div>
-          <h3><a href="https://radarprofesional.online/actualidad/decreto-1226-2026-plazos-renta-sismo/">Decreto 1226 de 2026: plazos de renta por el terremoto del 10 de agosto</a></h3>
-          <p>Plazos especiales de renta de personas naturales (AG 2025) para domicilio en municipios afectados por el sismo. Los NIT 09 a 26 vencen entre el 3 y el 13 de noviembre; los 01 a 08 ya vencieron.</p>
-          <a class="read-more" href="https://radarprofesional.online/actualidad/decreto-1226-2026-plazos-renta-sismo/">Leer noticia →</a>
-        </div>
-
         <div class="news-card" data-topic="Impuestos" data-search="factura electrónica DIAN errores compra no reconocida nota crédito denuncia emisor">
           <div class="meta">
             <span class="tag">Impuestos</span>
@@ -239,18 +206,6 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
           <h3><a href="https://radarprofesional.online/actualidad/mincit-zonas-francas-resolucion-1609-2026/">Zonas francas: el MinCIT convierte el comité que revisa los contratos de sus inmuebles en comité consultivo</a></h3>
           <p>La Resolución 1609 modifica la 0631 de 2016 y reorganiza el comité que analiza los contratos de arrendamiento de inmuebles usados por las zonas francas de Barranquilla, Cartagena y Palmaseca.</p>
           <a class="read-more" href="https://radarprofesional.online/actualidad/mincit-zonas-francas-resolucion-1609-2026/">Leer noticia →</a>
-        </div>
-
-        <div class="news-card" data-topic="Economía" data-search="MinCIT antidumping laminado decorativo India Madecentro prórroga cuestionarios resolución 785">
-          <div class="meta">
-            <span class="tag">Economía</span>
-            <span>Fecha de la fuente: 27 octubre 2026</span>
-            <span>Publicada en el sitio: 31 octubre 2026</span>
-            <span class="plazo">Plazo: 5 noviembre 2026</span>
-          </div>
-          <h3><a href="https://radarprofesional.online/actualidad/mincit-antidumping-laminado-india-2026/">Antidumping al laminado decorativo de India: el MinCIT prorroga el plazo para responder cuestionarios</a></h3>
-          <p>El plazo para responder el examen antidumping vencía el 28 de octubre y queda hasta el 5 de noviembre de 2026.</p>
-          <a class="read-more" href="https://radarprofesional.online/actualidad/mincit-antidumping-laminado-india-2026/">Leer noticia →</a>
         </div>
 
         <div class="news-card" data-topic="Impuestos" data-search="verificar factura electrónica CUFE código QR validación DIAN consulta emisor aclaración">
@@ -275,17 +230,26 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
           <a class="read-more" href="https://radarprofesional.online/actualidad/semana-nacional-normalizacion-dian-2026/">Leer noticia →</a>
         </div>
 
-        <div class="news-card" data-topic="Impuestos" data-search="Decreto 1419 de 2026: alivios tributarios tras el terremoto del 10 de agosto. Medidas tributarias, aduaneras y cambiarias por la emergencia económica">
+        <div class="news-card" data-topic="Economía" data-search="DANE registra una leve caída de la actividad económica en agosto: qué revisar desde finanzas y auditoría Finanzas y análisis económico">
+          <div class="meta">
+            <span class="tag">Economía</span>
+            <span>Fecha de la fuente: 19 octubre 2026</span>
+            <span>Publicada en el sitio: 21 octubre 2026</span>
+          </div>
+          <h3><a href="https://radarprofesional.online/actualidad/dane-ise-agosto-2026-actividad-economica/">DANE registra una leve caída de la actividad económica en agosto: qué revisar desde finanzas y auditoría</a></h3>
+          <p>El DANE publicó el 19 de octubre los resultados preliminares del Indicador de Seguimiento a la Economía (ISE) correspondientes a agosto de 2026.</p>
+          <a class="read-more" href="https://radarprofesional.online/actualidad/dane-ise-agosto-2026-actividad-economica/">Leer noticia →</a>
+        </div>
+
+        <div class="news-card" data-topic="Impuestos" data-search="DIAN revisó facturación en BogotáEats: lecciones de control para comercios y auditores Tributación y control fiscal">
           <div class="meta">
             <span class="tag">Impuestos</span>
-            <span>Fecha de la fuente: 17 septiembre 2026</span>
-            <span>Publicada en el sitio: 31 octubre 2026</span>
-            <span>Corregida en el sitio: 31 octubre 2026</span>
-            <span class="plazo">Plazo: 19 noviembre 2026</span>
+            <span>Fecha de la fuente: 20 octubre 2026</span>
+            <span>Publicada en el sitio: 21 octubre 2026</span>
           </div>
-          <h3><a href="https://radarprofesional.online/actualidad/decreto-1419-2026-emergencia-terremoto/">Decreto 1419 de 2026: alivios tributarios tras el terremoto del 10 de agosto</a></h3>
-          <p>El Gobierno expidió el Decreto 1419 con medidas tributarias para contribuyentes afectados por el terremoto. El plazo general para acogerse vence el 19 de noviembre de 2026.</p>
-          <a class="read-more" href="https://radarprofesional.online/actualidad/decreto-1419-2026-emergencia-terremoto/">Leer noticia →</a>
+          <h3><a href="https://radarprofesional.online/actualidad/dian-bogotaeats-control-facturacion-electronica-2026/">DIAN revisó facturación en BogotáEats: lecciones de control para comercios y auditores</a></h3>
+          <p>La DIAN informó el 20 de octubre que realizó verificaciones de factura electrónica y documento equivalente electrónico durante BogotáEats a Cielo Abierto, celebrado los días 16 y 17 de octubre de 2026.</p>
+          <a class="read-more" href="https://radarprofesional.online/actualidad/dian-bogotaeats-control-facturacion-electronica-2026/">Leer noticia →</a>
         </div>
 
         <div class="news-card" data-topic="Riesgos y tecnología" data-search="Superfinanciera actualiza MURIC: nueva validación del campo estado en reportes de cartera Regulación financiera y tecnología">
@@ -418,18 +382,6 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
           <h3><a href="/actualidad/dian-atencion-damnificados-valle-del-cauca-2026/">DIAN reporta avances en la atención tributaria a damnificados del Valle del Cauca</a></h3>
           <p>La DIAN informó el 9 de octubre de 2026 los resultados de su estrategia de acompañamiento a contribuyentes afectados por el terremoto del 10 de agosto en el Valle del Cauca.</p>
           <a class="read-more" href="/actualidad/dian-atencion-damnificados-valle-del-cauca-2026/">Leer noticia →</a>
-        </div>
-
-        <div class="news-card" data-topic="Impuestos" data-search="DIAN precisa el procedimiento para pagar el 15 % de sanciones por obligaciones cambiarias incumplidas La DIAN informó que los usuarios del régimen cambiario con obligaciones incumplidas al 10 de agosto de 2026 pueden acogerse, hasta el 19 de noviembre, al beneficio previsto en el numeral 4 del artículo 10 del Decreto Legislativo 1419 de 2026. DIAN">
-          <div class="meta">
-            <span class="tag">Impuestos</span>
-            <span>Fuente: 6 octubre 2026</span>
-            <span>Publicada en el sitio: 11 octubre 2026</span>
-            <span class="plazo">Plazo: 19 noviembre 2026</span>
-          </div>
-          <h3><a href="/actualidad/dian-sanciones-cambiarias-decreto-1419-2026/">DIAN precisa el procedimiento para pagar el 15 % de sanciones por obligaciones cambiarias incumplidas</a></h3>
-          <p>La DIAN informó que los usuarios del régimen cambiario con obligaciones incumplidas al 10 de agosto de 2026 pueden acogerse, hasta el 19 de noviembre, al beneficio previsto en el numeral 4 del artículo 10 del Decreto Legislativo 1419 de 2026.</p>
-          <a class="read-more" href="/actualidad/dian-sanciones-cambiarias-decreto-1419-2026/">Leer noticia →</a>
         </div>
 
         <div class="news-card" data-topic="Revisoría fiscal" data-search="Supersociedades delimita cuándo podría responder civilmente el revisor fiscal en una insolvencia La Superintendencia de Sociedades publicó la Pauta Legal 51, que analiza la responsabilidad civil subsidiaria cuando el patrimonio de una sociedad resulta insuficiente para pagar su pasivo externo. Revisoría fiscal">
@@ -684,7 +636,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 </footer>
 
 <script>
-const newsCards = [...document.querySelectorAll('#novedades .news-card, .hero .feature, .hero-side .news-card')];
+const newsCards = [...document.querySelectorAll('#novedades .news-card')];
 let selectedTopic = 'Todos';
 const input = document.getElementById('news-search');
 const norm = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -709,8 +661,6 @@ function filterNews() {
     n + (n === 1 ? ' noticia disponible' : ' noticias disponibles');
 
   document.getElementById('empty-state').hidden = total > 0;
-  document.querySelector('.hero').hidden =
-    !newsCards.some(c => c.closest('.hero') && !c.hidden);
 }
 
 input.addEventListener('input', filterNews);
