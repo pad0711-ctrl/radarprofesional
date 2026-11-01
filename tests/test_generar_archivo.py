@@ -51,7 +51,7 @@ class Plural(unittest.TestCase):
 
     def test_total_de_varios_usa_plural(self):
         html = g.reemplazar_archivo_y_contador(HTML_MINIMO, g.render_archivo(NOTAS), len(NOTAS))
-        self.assertIn('aria-live="polite">26 noticias disponibles</p>', html)
+        self.assertIn(f'aria-live="polite">{len(NOTAS)} noticias disponibles</p>', html)
 
     def test_resumen_de_mes_con_una_nota(self):
         archivo = g.render_archivo(NOTAS[:1])
@@ -152,9 +152,9 @@ class Plazos(unittest.TestCase):
         with self.assertRaises(ValueError):
             g.validar(n)
 
-    def test_los_cuatro_plazos_estan_en_los_datos(self):
+    def test_los_plazos_estan_en_los_datos(self):
         con_plazo = [n["href"] for n in NOTAS if "vence" in n]
-        self.assertEqual(len(con_plazo), 4)
+        self.assertEqual(len(con_plazo), 5)
 
 
 if __name__ == "__main__":
