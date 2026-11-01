@@ -1,11 +1,12 @@
-"""Regenera desde data/articulos.json las partes automáticas de index.html:
-la portada destacada (entre <!-- BEGIN:portada --> y <!-- END:portada -->), la lista
-"Lo último" (entre <!-- BEGIN:lo-ultimo --> y <!-- END:lo-ultimo -->), el archivo de
-publicaciones y el contador de noticias.
+"""Regenera desde data/ las partes automáticas del sitio:
+- index.html: la portada destacada (BEGIN/END:portada), la lista "Lo último"
+  (BEGIN/END:lo-ultimo), el panel Herramientas (BEGIN/END:herramientas), el archivo de
+  publicaciones y el contador de noticias.
+- sitemap.xml: home, herramientas y todas las notas.
 
 Uso:
-  python3 scripts/generar_archivo.py          # escribe index.html
-  python3 scripts/generar_archivo.py --check  # no escribe; falla si index.html no coincide
+  python3 scripts/generar_archivo.py          # escribe index.html y sitemap.xml
+  python3 scripts/generar_archivo.py --check  # no escribe; falla si algo no coincide
 """
 import json
 import re
@@ -16,6 +17,8 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 INDEX = RAIZ / "index.html"
 DATOS = RAIZ / "data" / "articulos.json"
+DATOS_HERRAMIENTAS = RAIZ / "data" / "herramientas.json"
+SITEMAP = RAIZ / "sitemap.xml"
 BASE = "https://radarprofesional.online"
 
 MESES = {m: i for i, m in enumerate(
@@ -89,6 +92,39 @@ def tarjeta(n, sangria, clase, encabezado):
     return "\n".join(lineas)
 
 
+def validar_herramientas(herramientas):
+    hrefs = [url_absoluta(h["href"]) for h in herramientas]
+    if len(hrefs) != len(set(hrefs)):
+        raise ValueError("Hay herramientas con la misma URL en data/herramientas.json")
+    for h in herramientas:
+        if not h["href"].startswith("/"):
+            raise ValueError(f"La herramienta debe usar ruta absoluta del sitio: {h['href']}")
+        for campo in ("titulo", "descripcion"):
+            if campo not in h:
+                raise ValueError(f"Falta '{campo}' en la herramienta {h['href']}")
+
+
+def render_herramientas(herramientas):
+    enlaces = "".join(
+        f'<a href="{atributo(h["href"])}">{texto(h["titulo"])}</a>'
+        f'<small>{texto(h["descripcion"])}</small>' for h in herramientas)
+    return (f'        <details class="tools"><summary>Herramientas</summary>'
+            f'<div class="panel">{enlaces}</div></details>')
+
+
+def render_sitemap(notas, herramientas):
+    urls = [BASE + "/"]
+    urls += [url_absoluta(h["href"]) for h in herramientas]
+    urls += [url_absoluta(n["href"]) for n in notas]
+    if len(urls) != len(set(urls)):
+        raise ValueError("Hay URL repetidas al generar sitemap.xml")
+    lineas = ['<?xml version="1.0" encoding="UTF-8"?>',
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    lineas += [f'  <url><loc>{texto(u)}</loc></url>' for u in urls]
+    lineas.append("</urlset>")
+    return "\n".join(lineas) + "\n"
+
+
 def render_portada(notas):
     destacada = next(n for n in notas if n.get("portada") == "destacada")
     laterales = [n for n in notas if n.get("portada") == "lateral"]
@@ -152,25 +188,38 @@ def reemplazar_archivo_y_contador(html, nuevo_archivo, total):
     return html
 
 
-def generar(html, notas):
+def cargar_herramientas():
+    herramientas = json.loads(DATOS_HERRAMIENTAS.read_text(encoding="utf-8"))["herramientas"]
+    validar_herramientas(herramientas)
+    return herramientas
+
+
+def generar(html, notas, herramientas=None):
+    if herramientas is None:
+        herramientas = cargar_herramientas()
     html = reemplazar_bloque(html, "portada", render_portada(notas))
     html = reemplazar_bloque(html, "lo-ultimo", render_lo_ultimo(notas))
+    html = reemplazar_bloque(html, "herramientas", render_herramientas(herramientas))
     return reemplazar_archivo_y_contador(html, render_archivo(notas), len(notas))
 
 
 def main():
     notas = json.loads(DATOS.read_text(encoding="utf-8"))["notas"]
     validar(notas)
+    herramientas = cargar_herramientas()
     actual = INDEX.read_text(encoding="utf-8")
-    nuevo = generar(actual, notas)
+    nuevo = generar(actual, notas, herramientas)
+    sitemap_nuevo = render_sitemap(notas, herramientas)
+    sitemap_actual = SITEMAP.read_text(encoding="utf-8")
     if "--check" in sys.argv:
-        if nuevo != actual:
-            print("index.html NO coincide con data/articulos.json. Ejecuta el script sin --check.")
+        if nuevo != actual or sitemap_nuevo != sitemap_actual:
+            print("index.html o sitemap.xml NO coinciden con data/. Ejecuta el script sin --check.")
             return 1
-        print(f"OK: index.html coincide con {len(notas)} notas.")
+        print(f"OK: index.html y sitemap.xml coinciden con {len(notas)} notas y {len(herramientas)} herramientas.")
         return 0
     INDEX.write_text(nuevo, encoding="utf-8")
-    print(f"index.html actualizado con {len(notas)} notas.")
+    SITEMAP.write_text(sitemap_nuevo, encoding="utf-8")
+    print(f"index.html y sitemap.xml actualizados con {len(notas)} notas y {len(herramientas)} herramientas.")
     return 0
 
 

@@ -1,0 +1,15 @@
+{
+  "_nota": "Fuente de verdad del panel Herramientas del menú. Cada entrada es una herramienta publicada: href (ruta), titulo y descripcion (la línea pequeña bajo el enlace).",
+  "herramientas": [
+    {
+      "href": "/calendario-tributario-2026/",
+      "titulo": "Calendario tributario 2026 por NIT",
+      "descripcion": "Fechas de renta, IVA, retención y otros impuestos nacionales"
+    },
+    {
+      "href": "/calendario-municipal-2026/",
+      "titulo": "Calendario municipal",
+      "descripcion": "Bogotá, Medellín, Cali, Barranquilla e Itagüí"
+    }
+  ]
+}

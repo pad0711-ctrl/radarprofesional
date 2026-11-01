@@ -24,6 +24,12 @@ Pruebas del script:
 
     python3 -I -m unittest discover -s tests -v
 
-Los bloques `<!-- BEGIN:portada -->`, `<!-- BEGIN:lo-ultimo -->` y el archivo se regeneran con el script. No editar esas partes a mano en index.html.
+Herramientas: `herramientas.json` es la fuente del panel "Herramientas" del menú. Cada entrada lleva `href` (ruta absoluta del sitio), `titulo` y `descripcion`. Para agregar una herramienta, añádela ahí y ejecuta el script.
 
-Pendiente de automatizar: el sitemap.xml y el panel de Herramientas.
+Qué regenera el script:
+- index.html: portada (`BEGIN/END:portada`), "Lo último" (`BEGIN/END:lo-ultimo`), panel Herramientas (`BEGIN/END:herramientas`), archivo de publicaciones y contador.
+- sitemap.xml: página de inicio, herramientas y todas las notas.
+
+No editar esas partes a mano en index.html ni sitemap.xml: el script las sobrescribe.
+
+Automatización: el workflow `.github/workflows/regenerar-sitio.yml` corre las pruebas y el script en cada cambio de `data/`, `scripts/` o `tests/` en main, y todos los días a las 6:00 a. m. (Bogotá). Si el resultado cambia, hace commit de index.html y sitemap.xml directo en main. Hoy el resultado solo depende de los datos, así que la corrida diaria no cambia nada hasta que se agregue una regla por fecha (por ejemplo, marcar plazos vencidos).
