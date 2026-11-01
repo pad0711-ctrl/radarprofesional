@@ -10,18 +10,35 @@ Uso:
 import json
 import re
 import sys
+from html import escape
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 INDEX = RAIZ / "index.html"
 DATOS = RAIZ / "data" / "articulos.json"
+BASE = "https://radarprofesional.online"
 
 MESES = {m: i for i, m in enumerate(
     ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
      "agosto", "septiembre", "octubre", "noviembre", "diciembre"], start=1)}
 NOMBRE_MES = {v: k.capitalize() for k, v in MESES.items()}
 SEPARADOR = " · "
-PROHIBIDOS_TEXTO = re.compile(r'[<>&"]')
+
+
+def atributo(s):
+    return escape(s, quote=True)
+
+
+def texto(s):
+    return escape(s, quote=False)
+
+
+def plural(n, singular, plural_):
+    return f"{n} {singular if n == 1 else plural_}"
+
+
+def url_absoluta(href):
+    return BASE + href if href.startswith("/") else href
 
 
 def fecha_movimiento(meta):
@@ -39,18 +56,15 @@ def fecha_movimiento(meta):
 
 
 def validar(notas):
-    hrefs = [n["href"] for n in notas]
+    hrefs = [url_absoluta(n["href"]) for n in notas]
     if len(hrefs) != len(set(hrefs)):
-        raise ValueError("Hay URL repetidas en data/articulos.json")
+        raise ValueError("Hay URL repetidas en data/articulos.json (comparadas como URL absolutas)")
     for n in notas:
         if not n["href"].startswith(("/actualidad/", "https://radarprofesional.online/actualidad/")):
             raise ValueError(f"URL fuera de /actualidad/: {n['href']}")
         for campo in ("titulo", "meta", "tema", "buscar", "resumen"):
             if campo not in n:
                 raise ValueError(f"Falta '{campo}' en {n['href']}")
-        for campo in ("titulo", "meta", "tema", "buscar", "resumen", "tag"):
-            if campo in n and PROHIBIDOS_TEXTO.search(n[campo]):
-                raise ValueError(f"Caracter no permitido (<, >, &, \") en '{campo}' de {n['href']}")
         fecha_movimiento(n["meta"])
         if n.get("portada") not in (None, "destacada", "lateral"):
             raise ValueError(f"'portada' inválida en {n['href']}")
@@ -62,15 +76,15 @@ def validar(notas):
 
 def tarjeta(n, sangria, clase, encabezado):
     i = " " * sangria
-    lineas = [f'{i}<div class="{clase}" data-topic="{n["tema"]}" data-search="{n["buscar"]}">',
+    lineas = [f'{i}<div class="{clase}" data-topic="{atributo(n["tema"])}" data-search="{atributo(n["buscar"])}">',
               f'{i}  <div class="meta">']
     if n.get("tag"):
-        lineas.append(f'{i}    <span class="tag">{n["tag"]}</span>')
-    lineas += [f'{i}    <span>{parte}</span>' for parte in n["meta"].split(SEPARADOR)]
+        lineas.append(f'{i}    <span class="tag">{texto(n["tag"])}</span>')
+    lineas += [f'{i}    <span>{texto(parte)}</span>' for parte in n["meta"].split(SEPARADOR)]
     lineas += [f'{i}  </div>',
-               f'{i}  <{encabezado}><a href="{n["href"]}">{n["titulo"]}</a></{encabezado}>',
-               f'{i}  <p>{n["resumen"]}</p>',
-               f'{i}  <a class="read-more" href="{n["href"]}">Leer noticia →</a>',
+               f'{i}  <{encabezado}><a href="{atributo(n["href"])}">{texto(n["titulo"])}</a></{encabezado}>',
+               f'{i}  <p>{texto(n["resumen"])}</p>',
+               f'{i}  <a class="read-more" href="{atributo(n["href"])}">Leer noticia →</a>',
                f'{i}</div>']
     return "\n".join(lineas)
 
@@ -105,10 +119,10 @@ def render_archivo(notas):
     for (anio, mes) in sorted(grupos, reverse=True):
         items = grupos[(anio, mes)]
         lis = "".join(
-            f'        <li>\n          <a href="{n["href"]}">{n["titulo"]}</a><br>\n'
-            f'          <small>{n["meta"]}</small>\n        </li>\n' for n in items)
+            f'        <li>\n          <a href="{atributo(n["href"])}">{texto(n["titulo"])}</a><br>\n'
+            f'          <small>{texto(n["meta"])}</small>\n        </li>\n' for n in items)
         bloques.append(
-            f"    <details>\n      <summary>{NOMBRE_MES[mes]} de {anio} · {len(items)} noticias</summary>\n"
+            f"    <details>\n      <summary>{NOMBRE_MES[mes]} de {anio} · {plural(len(items), 'noticia', 'noticias')}</summary>\n"
             f"      <ul>\n{lis}      </ul>\n    </details>")
     cabecera = ('<section class="archive" id="archivo">\n'
                 '    <h2 class="section-heading">Archivo de publicaciones</h2>\n'
@@ -131,7 +145,8 @@ def reemplazar_archivo_y_contador(html, nuevo_archivo, total):
     html, n1 = re.subn(r'<section class="archive" id="archivo">.*?</section>',
                        lambda _: nuevo_archivo, html, count=1, flags=re.S)
     html, n2 = re.subn(r'(<p id="result-count" aria-live="polite">)[^<]*(</p>)',
-                       lambda m: f"{m.group(1)}{total} noticias disponibles{m.group(2)}", html, count=1)
+                       lambda m: f"{m.group(1)}{plural(total, 'noticia disponible', 'noticias disponibles')}{m.group(2)}",
+                       html, count=1)
     if n1 != 1 or n2 != 1:
         raise ValueError("No se encontró la sección de archivo o el contador en index.html")
     return html

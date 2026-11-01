@@ -20,6 +20,10 @@ Campos de cada nota:
 - `resumen`: párrafo de la tarjeta. Obligatorio.
 - `portada`: `"destacada"` (una nota) o `"lateral"` (dos notas). Las demás van a "Lo último", ordenadas por la fecha de movimiento más reciente.
 
+Pruebas del script:
+
+    python3 -I -m unittest discover -s tests -v
+
 Los bloques `<!-- BEGIN:portada -->`, `<!-- BEGIN:lo-ultimo -->` y el archivo se regeneran con el script. No editar esas partes a mano en index.html.
 
 Pendiente de automatizar: el sitemap.xml y el panel de Herramientas.
