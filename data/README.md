@@ -12,4 +12,14 @@ Y para verificar sin escribir:
 
 El script agrupa cada nota por el mes de su movimiento más reciente (publicación o corrección) y valida que no haya URL repetidas.
 
-Pendiente de automatizar: las tarjetas de "Lo último", la portada destacada (hero), el sitemap.xml y el panel de Herramientas. Hoy siguen editándose a mano.
+Campos de cada nota:
+- `href`, `titulo`, `meta`: URL, título y línea de fuente/fechas (se muestra en el archivo y en la tarjeta).
+- `tag` (opcional): etiqueta visible de la tarjeta.
+- `tema`: valor de `data-topic` (filtro del buscador). Obligatorio.
+- `buscar`: texto del buscador (`data-search`). Obligatorio.
+- `resumen`: párrafo de la tarjeta. Obligatorio.
+- `portada`: `"destacada"` (una nota) o `"lateral"` (dos notas). Las demás van a "Lo último", ordenadas por la fecha de movimiento más reciente.
+
+Los bloques `<!-- BEGIN:portada -->`, `<!-- BEGIN:lo-ultimo -->` y el archivo se regeneran con el script. No editar esas partes a mano en index.html.
+
+Pendiente de automatizar: el sitemap.xml y el panel de Herramientas.

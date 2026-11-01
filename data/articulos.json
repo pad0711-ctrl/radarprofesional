@@ -1,135 +1,242 @@
 {
-  "_nota": "Fuente de verdad del archivo de publicaciones. Cada entrada es una nota publicada; las URL y textos se copian tal cual.",
+  "_nota": "Fuente de verdad de index.html y del archivo. 'portada' marca la nota destacada (una) o laterales (dos); el resto sale en 'Lo último' ordenado por la fecha más reciente. 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
       "href": "https://radarprofesional.online/actualidad/dian-factura-electronica-errores-2026/",
       "titulo": "Factura electrónica con errores o compra no reconocida: qué hacer según la DIAN",
-      "meta": "Fecha de la fuente: 29 octubre 2026 · Publicada en el sitio: 31 octubre 2026"
+      "meta": "Fuente: DIAN, comunicado del 29 de octubre de 2026 · Publicada en el sitio: 31 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "factura electrónica DIAN errores compra no reconocida nota crédito denuncia emisor",
+      "resumen": "La DIAN explica cómo verificar una factura electrónica a tu nombre con errores, pedir la corrección al emisor y denunciar si no responde.",
+      "tag": "Impuestos"
     },
     {
       "href": "https://radarprofesional.online/actualidad/mincit-zonas-francas-resolucion-1609-2026/",
       "titulo": "Zonas francas: el MinCIT convierte el comité que revisa los contratos de sus inmuebles en comité consultivo",
-      "meta": "Fecha de la fuente: 27 octubre 2026 · Publicada en el sitio: 31 octubre 2026"
+      "meta": "Fuente: MinCIT, Resolución 1609 del 27 de octubre de 2026 · Publicada en el sitio: 31 octubre 2026",
+      "tema": "Economía",
+      "buscar": "MinCIT zonas francas resolución 1609 comité consultivo contratos arrendamiento inmuebles Barranquilla Cartagena Palmaseca",
+      "resumen": "La Resolución 1609 modifica la 0631 de 2016 y reorganiza el comité que analiza los contratos de arrendamiento de inmuebles usados por las zonas francas de Barranquilla, Cartagena y Palmaseca.",
+      "tag": "Economía"
     },
     {
       "href": "https://radarprofesional.online/actualidad/mincit-antidumping-laminado-india-2026/",
       "titulo": "Antidumping al laminado decorativo de India: el MinCIT prorroga el plazo para responder cuestionarios",
-      "meta": "Fecha de la fuente: 27 octubre 2026 · Publicada en el sitio: 31 octubre 2026"
+      "meta": "Fuente: MinCIT, Resolución 785 del 27 de octubre de 2026 · Publicada en el sitio: 31 octubre 2026",
+      "tema": "Economía",
+      "buscar": "MinCIT antidumping laminado decorativo India Madecentro prórroga cuestionarios resolución 785",
+      "resumen": "El plazo para responder el examen antidumping vencía el 28 de octubre y queda hasta el 5 de noviembre de 2026.",
+      "tag": "Economía"
     },
     {
       "href": "https://radarprofesional.online/actualidad/dian-verificar-factura-electronica-cufe-2026/",
       "titulo": "Cómo verificar si una factura electrónica fue validada por la DIAN: CUFE, código QR y consulta",
-      "meta": "Fecha de la fuente: 26 octubre 2026 · Publicada en el sitio: 31 octubre 2026"
+      "meta": "Fuente: DIAN, comunicado del 26 de octubre de 2026 · Publicada en el sitio: 31 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "verificar factura electrónica CUFE código QR validación DIAN consulta emisor aclaración",
+      "resumen": "Cómo ubicar el CUFE, escanear el código QR y consultar en la DIAN si una factura fue validada. Si no aparece, pide aclaración al emisor antes de registrarla.",
+      "tag": "Impuestos"
     },
     {
       "href": "https://radarprofesional.online/actualidad/semana-nacional-normalizacion-dian-2026/",
       "titulo": "Semana nacional de normalización tributaria, aduanera y cambiaria: calendario de la DIAN",
-      "meta": "Fecha de la fuente: sin fecha en la fuente · Publicada en el sitio: 31 octubre 2026"
+      "meta": "Fuente: DIAN, página del Decreto 1419 de 2026 · Publicada en el sitio: 31 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "Semana nacional de normalización tributaria, aduanera y cambiaria: calendario de la DIAN del 29 de octubre al 14 de noviembre de 2026",
+      "resumen": "La DIAN programó jornadas presenciales y virtuales por dirección seccional, del 29 de octubre al 14 de noviembre de 2026, vinculadas al Decreto 1419 de 2026.",
+      "tag": "Impuestos"
     },
     {
       "href": "https://radarprofesional.online/actualidad/decreto-1419-2026-emergencia-terremoto/",
       "titulo": "Decreto 1419 de 2026: alivios tributarios tras el terremoto del 10 de agosto",
-      "meta": "Fecha de la fuente: 17 septiembre 2026 · Publicada en el sitio: 31 octubre 2026 · Corregida en el sitio: 31 octubre 2026"
+      "meta": "Fecha de la fuente: 17 septiembre 2026 · Publicada en el sitio: 31 octubre 2026 · Corregida en el sitio: 31 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "Decreto 1419 de 2026: alivios tributarios tras el terremoto del 10 de agosto. Medidas tributarias, aduaneras y cambiarias por la emergencia económica",
+      "resumen": "El Gobierno expidió el Decreto 1419 con medidas tributarias para contribuyentes afectados por el terremoto. El plazo general para acogerse vence el 19 de noviembre de 2026.",
+      "tag": "Impuestos"
     },
     {
       "href": "https://radarprofesional.online/actualidad/dane-ise-agosto-2026-actividad-economica/",
       "titulo": "DANE registra una leve caída de la actividad económica en agosto: qué revisar desde finanzas y auditoría",
-      "meta": "Fecha de la fuente: 19 octubre 2026 · Publicada en el sitio: 21 octubre 2026"
+      "meta": "Fecha de la fuente: 19 octubre 2026 · Publicada en el sitio: 21 octubre 2026",
+      "tag": "Economía",
+      "tema": "Economía",
+      "buscar": "DANE registra una leve caída de la actividad económica en agosto: qué revisar desde finanzas y auditoría Finanzas y análisis económico",
+      "resumen": "El DANE publicó el 19 de octubre los resultados preliminares del Indicador de Seguimiento a la Economía (ISE) correspondientes a agosto de 2026.",
+      "portada": "lateral"
     },
     {
       "href": "https://radarprofesional.online/actualidad/dian-bogotaeats-control-facturacion-electronica-2026/",
       "titulo": "DIAN revisó facturación en BogotáEats: lecciones de control para comercios y auditores",
-      "meta": "Fecha de la fuente: 20 octubre 2026 · Publicada en el sitio: 21 octubre 2026"
+      "meta": "Fecha de la fuente: 20 octubre 2026 · Publicada en el sitio: 21 octubre 2026",
+      "tag": "Impuestos",
+      "tema": "Impuestos",
+      "buscar": "DIAN revisó facturación en BogotáEats: lecciones de control para comercios y auditores Tributación y control fiscal",
+      "resumen": "La DIAN informó el 20 de octubre que realizó verificaciones de factura electrónica y documento equivalente electrónico durante BogotáEats a Cielo Abierto, celebrado los días 16 y 17 de octubre de 2026.",
+      "portada": "lateral"
     },
     {
       "href": "https://radarprofesional.online/actualidad/superfinanciera-muric-validacion-132-octubre-2026/",
       "titulo": "Superfinanciera actualiza MURIC: nueva validación del campo estado en reportes de cartera",
-      "meta": "Fecha de la fuente: 20 octubre 2026 · Publicada en el sitio: 21 octubre 2026"
+      "meta": "Fecha de la fuente: 20 octubre 2026 · Publicada en el sitio: 21 octubre 2026",
+      "tag": "Riesgos y tecnología",
+      "tema": "Riesgos y tecnología",
+      "buscar": "Superfinanciera actualiza MURIC: nueva validación del campo estado en reportes de cartera Regulación financiera y tecnología",
+      "resumen": "La Superintendencia Financiera registró el 20 de octubre de 2026, a las 9:30 p. m., una actualización de las reglas lógicas y de negocio del Módulo Único de Reporte de Información de Cartera (MURIC)."
     },
     {
       "href": "https://radarprofesional.online/actualidad/superfinanciera-segunda-ronda-fiduciarias-recursos-publicos-2026/",
       "titulo": "Superfinanciera abre segunda ronda de comentarios sobre riesgos fiduciarios en recursos públicos",
-      "meta": "Fecha de la fuente: 19 octubre 2026 · Publicada en el sitio: 21 octubre 2026"
+      "meta": "Fecha de la fuente: 19 octubre 2026 · Publicada en el sitio: 21 octubre 2026",
+      "tag": "Riesgos y tecnología",
+      "tema": "Riesgos y tecnología",
+      "buscar": "Superfinanciera abre segunda ronda de comentarios sobre riesgos fiduciarios en recursos públicos Supervisión financiera y gestión de riesgos",
+      "resumen": "La Superintendencia Financiera publicó una segunda ronda de consulta de su proyecto de circular externa 1101 de 2026, orientado a instrucciones de gestión de riesgos en negocios fiduciarios que administran recursos públicos y a modificaciones del módulo de registro de negocios."
     },
     {
       "href": "https://radarprofesional.online/actualidad/google-mintic-15000-becas-certificados-2026/",
       "titulo": "Google y MinTIC anuncian 15.000 becas: qué se sabe y dónde consultar",
-      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026"
+      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026",
+      "tag": "Riesgos y tecnología",
+      "tema": "Riesgos y tecnología",
+      "buscar": "Google y MinTIC anuncian 15.000 becas: qué se sabe y dónde consultar Formación profesional",
+      "resumen": "Google y MinTIC anunciaron 15.000 nuevas becas para los Certificados de Carrera de Google. El Ministerio de Educación informó la iniciativa el 16 de octubre de 2026, dentro de una colaboración para fortalecer las habilidades digitales en Colombia."
     },
     {
       "href": "https://radarprofesional.online/actualidad/dane-industria-agosto-2026-produccion-empleo/",
       "titulo": "Industria: producción cae 3,7 % y empleo baja 1,3 % en agosto",
-      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026"
+      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026",
+      "tag": "Economía",
+      "tema": "Economía",
+      "buscar": "Industria: producción cae 3,7 % y empleo baja 1,3 % en agosto Economía empresarial",
+      "resumen": "El DANE divulgó el 16 de octubre los resultados de agosto de 2026 de su encuesta manufacturera. Frente a agosto de 2025, la producción real cayó 3,7 %, las ventas reales disminuyeron 3,5 % y el personal ocupado se redujo 1,3 %."
     },
     {
       "href": "https://radarprofesional.online/actualidad/dane-comercio-agosto-2026-ventas-empleo/",
       "titulo": "Comercio minorista: ventas crecen 7,3 % y empleo aumenta 1,4 %",
-      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026"
+      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026",
+      "tag": "Economía",
+      "tema": "Economía",
+      "buscar": "Comercio minorista: ventas crecen 7,3 % y empleo aumenta 1,4 % Economía empresarial",
+      "resumen": "El DANE publicó el 16 de octubre los resultados comerciales de agosto de 2026. Las ventas reales del comercio minorista aumentaron 7,3 % frente al mismo mes de 2025 y el personal ocupado creció 1,4 %."
     },
     {
       "href": "https://radarprofesional.online/actualidad/superfinanciera-circular-009-esquemas-bilaterales-2026/",
       "titulo": "Superfinanciera publica Circular 009 sobre reportes de esquemas bilaterales",
-      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026"
+      "meta": "Fecha de la fuente: 16 octubre 2026 · Publicada en el sitio: 17 octubre 2026",
+      "tag": "Riesgos y tecnología",
+      "tema": "Riesgos y tecnología",
+      "buscar": "Superfinanciera publica Circular 009 sobre reportes de esquemas bilaterales Regulación financiera",
+      "resumen": "La Superintendencia Financiera incorporó a su registro oficial la Circular Externa 009 del 16 de octubre de 2026. Su objeto es impartir instrucciones de reporte sobre los esquemas bilaterales mencionados en el numeral 1 del artículo 2.17.7.1.1 del Decreto 2555 de 2010."
     },
     {
       "href": "https://radarprofesional.online/actualidad/banrep-seguro-desempleo-estabilidad-laboral-2026/",
       "titulo": "Estudio sobre seguro de desempleo encuentra mayor estabilidad al volver a trabajar",
-      "meta": "Fecha de la fuente: 15 octubre 2026 · Publicada en el sitio: 17 octubre 2026"
+      "meta": "Fecha de la fuente: 15 octubre 2026 · Publicada en el sitio: 17 octubre 2026",
+      "tag": "Economía",
+      "tema": "Economía",
+      "buscar": "Estudio sobre seguro de desempleo encuentra mayor estabilidad al volver a trabajar Trabajo e investigación",
+      "resumen": "Una investigación publicada el 15 de octubre en Borradores de Economía, número 1374, evalúa el seguro de desempleo en Colombia. Sus resultados estiman aproximadamente un mes adicional de desempleo asociado al acceso al mecanismo estudiado."
     },
     {
-      "href": "/actualidad/power-bi-octubre-2026-gantt-ia-modelos-semanticos/",
+      "href": "https://radarprofesional.online/actualidad/power-bi-octubre-2026-gantt-ia-modelos-semanticos/",
       "titulo": "Power BI incorpora Gantt, amplía la creación de informes con IA y mejora el control de capacidad",
-      "meta": "Fuente: 15 octubre 2026 · Publicada en el sitio: 16 octubre 2026"
+      "meta": "Fecha de la fuente: 15 octubre 2026 · Publicada en el sitio: 16 octubre 2026",
+      "tag": "Riesgos y tecnología",
+      "tema": "Riesgos y tecnología",
+      "buscar": "Power BI incorpora Gantt, amplía la creación de informes con IA y mejora el control de capacidad Power BI Microsoft Fabric Gantt inteligencia artificial capacidad auditoría",
+      "resumen": "Microsoft actualizó Power BI con nuevas funciones de IA, un Gantt en vista previa y mejoras para monitorear capacidad en modelos semánticos."
     },
     {
-      "href": "/actualidad/supersociedades-radiografia-financiera-clubes-futbol-2025/",
+      "href": "https://radarprofesional.online/actualidad/supersociedades-radiografia-financiera-clubes-futbol-2025/",
       "titulo": "Supersociedades actualiza la radiografía financiera de los clubes: activos crecen 7,7% e ingresos 16,6%",
-      "meta": "Fuente: 15 octubre 2026 · Publicada en el sitio: 15 octubre 2026"
+      "meta": "Fecha de la fuente: 15 octubre 2026 · Publicada en el sitio: 15 octubre 2026",
+      "tema": "Auditoría",
+      "buscar": "Supersociedades actualiza la radiografía financiera de los clubes: activos crecen 7,7% e ingresos 16,6% La Superintendencia de Sociedades publicó su análisis financiero del fútbol profesional colombiano con información correspondiente al cierre de 2025. Auditoría análisis financiero",
+      "resumen": "Supersociedades presentó cifras con corte a 2025 y referencias sectoriales útiles para la planeación de procedimientos analíticos.",
+      "tag": "Auditoría"
     },
     {
-      "href": "/actualidad/dian-pereira-reanudacion-terminos-2026/",
+      "href": "https://radarprofesional.online/actualidad/dian-pereira-reanudacion-terminos-2026/",
       "titulo": "DIAN Pereira: este 15 de octubre se reanudan términos administrativos suspendidos por la emergencia",
-      "meta": "Resolución: 10 septiembre 2026 · Publicada en el sitio: 15 octubre 2026"
+      "meta": "Resolución: 10 septiembre 2026 · Publicada en el sitio: 15 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "DIAN Pereira reanuda términos administrativos suspendidos por la emergencia La Resolución 013397 prevé la reanudación desde el 15 de octubre de 2026. Procedimiento tributario",
+      "resumen": "La Resolución 013397 prevé que determinados términos administrativos de la seccional Pereira vuelvan a correr desde el 15 de octubre de 2026.",
+      "tag": "Impuestos"
     },
     {
-      "href": "/actualidad/dian-rte-donaciones-2026/",
+      "href": "https://radarprofesional.online/actualidad/dian-rte-donaciones-2026/",
       "titulo": "DIAN aclara la diferencia entre recibir donaciones y otorgar beneficios tributarios en el Régimen Tributario Especial",
-      "meta": "Fuente: 13 octubre 2026 · Publicada en el sitio: 13 octubre 2026"
+      "meta": "Fecha de la fuente: 13 octubre 2026 · Publicada en el sitio: 13 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "DIAN aclara la diferencia entre recibir donaciones y otorgar beneficios tributarios en el Régimen Tributario Especial La Dirección de Impuestos y Aduanas Nacionales (DIAN), mediante el Comunicado de Prensa 131 del 13 de octubre de 2026, precisó el alcance tributario de pertenecer al Régimen Tributario Especial (RTE) y su relación con la recepción de donaciones por parte de entidades sin ánimo de lucro.",
+      "resumen": "La Dirección de Impuestos y Aduanas Nacionales (DIAN), mediante el Comunicado de Prensa 131 del 13 de octubre de 2026, precisó el alcance tributario de pertenecer al Régimen Tributario Especial (RTE) y su relación con la recepción de donaciones por parte de entidades sin ánimo de lucro.",
+      "tag": "Impuestos"
     },
     {
-      "href": "/actualidad/dian-atencion-damnificados-valle-del-cauca-2026/",
+      "href": "https://radarprofesional.online/actualidad/dian-atencion-damnificados-valle-del-cauca-2026/",
       "titulo": "DIAN reporta avances en la atención tributaria a damnificados del Valle del Cauca",
-      "meta": "Fuente: 9 octubre 2026 · Publicada en el sitio: 11 octubre 2026"
+      "meta": "Fecha de la fuente: 9 octubre 2026 · Publicada en el sitio: 11 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "DIAN reporta avances en la atención tributaria a damnificados del Valle del Cauca La DIAN informó el 9 de octubre de 2026 los resultados de su estrategia de acompañamiento a contribuyentes afectados por el terremoto del 10 de agosto en el Valle del Cauca.",
+      "resumen": "La DIAN informó el 9 de octubre de 2026 los resultados de su estrategia de acompañamiento a contribuyentes afectados por el terremoto del 10 de agosto en el Valle del Cauca.",
+      "tag": "Impuestos"
     },
     {
-      "href": "/actualidad/bogota-exogena-2025-2026-09-26/",
+      "href": "https://radarprofesional.online/actualidad/bogota-exogena-2025-2026-09-26/",
       "titulo": "Bogotá cambia el calendario de información exógena: vencimientos del 26 de octubre al 5 de noviembre",
-      "meta": "Fecha de la fuente: 20 octubre 2026 · Publicada en el sitio: 26 septiembre 2026 · Actualizada en el sitio: 21 octubre 2026"
+      "meta": "Fecha de la fuente: 19 octubre 2026 (Resolución DDI-042682) · Publicada en el sitio: 26 septiembre 2026 · Actualizada en el sitio: 21 octubre 2026",
+      "tag": "Impuestos",
+      "tema": "Impuestos",
+      "buscar": "Bogotá cambia el calendario de información exógena: vencimientos del 26 de octubre al 5 de noviembre Bogotá · Información exógena",
+      "resumen": "La Resolución DDI-042682 del 19 de octubre de 2026 modifica el artículo 28 de la Resolución DDI-024115. El calendario de entrega de información exógena distrital pasa al periodo del 26 de octubre al 5 de noviembre de 2026, según el último dígito de identificación.",
+      "portada": "destacada"
     },
     {
-      "href": "/actualidad/dian-sanciones-cambiarias-decreto-1419-2026/",
+      "href": "https://radarprofesional.online/actualidad/dian-sanciones-cambiarias-decreto-1419-2026/",
       "titulo": "DIAN precisa el procedimiento para pagar el 15 % de sanciones por obligaciones cambiarias incumplidas",
-      "meta": "Fuente: 6 octubre 2026 · Publicada en el sitio: 11 octubre 2026"
+      "meta": "Fecha de la fuente: 6 octubre 2026 · Publicada en el sitio: 11 octubre 2026",
+      "tema": "Impuestos",
+      "buscar": "DIAN precisa el procedimiento para pagar el 15 % de sanciones por obligaciones cambiarias incumplidas La DIAN informó que los usuarios del régimen cambiario con obligaciones incumplidas al 10 de agosto de 2026 pueden acogerse, hasta el 19 de noviembre, al beneficio previsto en el numeral 4 del artículo 10 del Decreto Legislativo 1419 de 2026. DIAN",
+      "resumen": "La DIAN informó que los usuarios del régimen cambiario con obligaciones incumplidas al 10 de agosto de 2026 pueden acogerse, hasta el 19 de noviembre, al beneficio previsto en el numeral 4 del artículo 10 del Decreto Legislativo 1419 de 2026.",
+      "tag": "Impuestos"
     },
     {
-      "href": "/actualidad/responsabilidad-revisor-fiscal-insolvencia/",
+      "href": "https://radarprofesional.online/actualidad/responsabilidad-revisor-fiscal-insolvencia/",
       "titulo": "Supersociedades delimita cuándo podría responder civilmente el revisor fiscal en una insolvencia",
-      "meta": "Fuente: Pauta Legal 51 de Supersociedades (el documento no trae fecha) · Publicada en el sitio: 11 octubre 2026"
+      "meta": "Fuente: Pauta Legal 51 de Supersociedades (el documento no trae fecha) · Publicada en el sitio: 11 octubre 2026",
+      "tema": "Revisoría fiscal",
+      "buscar": "Supersociedades delimita cuándo podría responder civilmente el revisor fiscal en una insolvencia La Superintendencia de Sociedades publicó la Pauta Legal 51, que analiza la responsabilidad civil subsidiaria cuando el patrimonio de una sociedad resulta insuficiente para pagar su pasivo externo. Revisoría fiscal",
+      "resumen": "La Superintendencia de Sociedades publicó la Pauta Legal 51, que analiza la responsabilidad civil subsidiaria cuando el patrimonio de una sociedad resulta insuficiente para pagar su pasivo externo.",
+      "tag": "Revisoría fiscal"
     },
     {
-      "href": "/actualidad/transformacion-sa-sas-estados-financieros-base/",
+      "href": "https://radarprofesional.online/actualidad/transformacion-sa-sas-estados-financieros-base/",
       "titulo": "Transformación de S.A. a S.A.S.: los estados financieros base siguen siendo necesarios",
-      "meta": "Documento: 3 agosto 2026 · Publicada en el sitio: 28 septiembre 2026"
+      "meta": "Documento: 3 agosto 2026 · Publicada en el sitio: 28 septiembre 2026",
+      "tema": "Contabilidad",
+      "buscar": "Transformación de S.A. a S.A.S.: los estados financieros base siguen siendo necesarios La Superintendencia de Sociedades reiteró, mediante el Oficio 115-323554 del 3 de agosto de 2026, que la transformación de una sociedad anónima en sociedad por acciones simplificada constituye una reforma estatutaria y debe sustentarse en los estados financieros previstos para esta clase de operaciones. Contabilidad y revisoría fiscal",
+      "resumen": "La Superintendencia de Sociedades reiteró, mediante el Oficio 115-323554 del 3 de agosto de 2026, que la transformación de una sociedad anónima en sociedad por acciones simplificada constituye una reforma estatutaria y debe sustentarse en los estados financieros previstos para esta clase de operaciones.",
+      "tag": "Contabilidad"
     },
     {
-      "href": "/actualidad/simple-intereses-2026-09-26/",
+      "href": "https://radarprofesional.online/actualidad/simple-intereses-2026-09-26/",
       "titulo": "¿Ajustas anticipos del SIMPLE? Revisa también los intereses",
-      "meta": "Documento: 10 septiembre 2026 · Publicado por DIAN: 16 septiembre 2026 · Publicada en el sitio: 26 septiembre 2026"
+      "meta": "Documento: 10 septiembre 2026 · Publicado por DIAN: 16 septiembre 2026 · Publicada en el sitio: 26 septiembre 2026",
+      "tema": "Impuestos",
+      "buscar": "¿Ajustas anticipos del SIMPLE? Revisa también los intereses La DIAN aclaró que, si al presentar la declaración anual del Régimen Simple de Tributación (SIMPLE) ajustas anticipos bimestrales por un mayor valor, se generan intereses. Se cuentan desde el vencimiento del anticipo correspondiente hasta la presentación de la declaración anual que hace el ajuste. El oficio se publicó el 16 de septiembre. Impuestos",
+      "resumen": "La DIAN aclaró que, si al presentar la declaración anual del Régimen Simple de Tributación (SIMPLE) ajustas anticipos bimestrales por un mayor valor, se generan intereses. Se cuentan desde el vencimiento del anticipo correspondiente hasta la presentación de la declaración anual que hace el ajuste. El oficio se publicó el 16 de septiembre.",
+      "tag": "Impuestos"
     },
     {
-      "href": "/actualidad/retenciones-2026-09-17/",
+      "href": "https://radarprofesional.online/actualidad/retenciones-2026-09-17/",
       "titulo": "Retenciones sin pago: la DIAN refuerza las acciones de cobro",
-      "meta": "Fuente: 17 septiembre 2026 · Publicada en el sitio: 26 septiembre 2026"
+      "meta": "Fecha de la fuente: 17 septiembre 2026 · Publicada en el sitio: 26 septiembre 2026",
+      "tema": "Impuestos",
+      "buscar": "Retenciones sin pago: la DIAN refuerza las acciones de cobro La DIAN está reforzando el cobro de retenciones declaradas sin pagar o cuyas declaraciones no producen efectos legales. Pide a los representantes de las empresas revisar si tienen pagos pendientes. Tributación",
+      "resumen": "La DIAN está reforzando el cobro de retenciones declaradas sin pagar o cuyas declaraciones no producen efectos legales. Pide a los representantes de las empresas revisar si tienen pagos pendientes.",
+      "tag": "Impuestos"
     }
   ]
 }

@@ -1,4 +1,7 @@
-"""Regenera el archivo de publicaciones y el contador de index.html desde data/articulos.json.
+"""Regenera desde data/articulos.json las partes automáticas de index.html:
+la portada destacada (entre <!-- BEGIN:portada --> y <!-- END:portada -->), la lista
+"Lo último" (entre <!-- BEGIN:lo-ultimo --> y <!-- END:lo-ultimo -->), el archivo de
+publicaciones y el contador de noticias.
 
 Uso:
   python3 scripts/generar_archivo.py          # escribe index.html
@@ -17,17 +20,19 @@ MESES = {m: i for i, m in enumerate(
     ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
      "agosto", "septiembre", "octubre", "noviembre", "diciembre"], start=1)}
 NOMBRE_MES = {v: k.capitalize() for k, v in MESES.items()}
+SEPARADOR = " · "
+PROHIBIDOS_TEXTO = re.compile(r'[<>&"]')
 
 
-def mes_publicacion(meta):
-    """Devuelve (año, mes) del movimiento más reciente de la nota: la última fecha de
+def fecha_movimiento(meta):
+    """Fecha (año, mes, día) del movimiento más reciente de la nota: la última fecha de
     'Publicada', 'Corregida' o 'Actualizada en el sitio' dentro del texto meta."""
     fechas = []
-    for m in re.finditer(r"(?:Publicada|Corregida|Actualizada) en el sitio:\s*\d{1,2} ([a-záéíóú]+) (\d{4})", meta):
-        mes = MESES.get(m.group(1).lower())
+    for m in re.finditer(r"(?:Publicada|Corregida|Actualizada) en el sitio:\s*(\d{1,2}) ([a-záéíóú]+) (\d{4})", meta):
+        mes = MESES.get(m.group(2).lower())
         if not mes:
-            raise ValueError(f"Mes desconocido: {m.group(1)}")
-        fechas.append((int(m.group(2)), mes))
+            raise ValueError(f"Mes desconocido: {m.group(2)}")
+        fechas.append((int(m.group(3)), mes, int(m.group(1))))
     if not fechas:
         raise ValueError(f"Falta 'Publicada en el sitio' en: {meta}")
     return max(fechas)
@@ -40,13 +45,62 @@ def validar(notas):
     for n in notas:
         if not n["href"].startswith(("/actualidad/", "https://radarprofesional.online/actualidad/")):
             raise ValueError(f"URL fuera de /actualidad/: {n['href']}")
-        mes_publicacion(n["meta"])
+        for campo in ("titulo", "meta", "tema", "buscar", "resumen"):
+            if campo not in n:
+                raise ValueError(f"Falta '{campo}' en {n['href']}")
+        for campo in ("titulo", "meta", "tema", "buscar", "resumen", "tag"):
+            if campo in n and PROHIBIDOS_TEXTO.search(n[campo]):
+                raise ValueError(f"Caracter no permitido (<, >, &, \") en '{campo}' de {n['href']}")
+        fecha_movimiento(n["meta"])
+        if n.get("portada") not in (None, "destacada", "lateral"):
+            raise ValueError(f"'portada' inválida en {n['href']}")
+    if sum(1 for n in notas if n.get("portada") == "destacada") != 1:
+        raise ValueError("Debe haber exactamente una nota con portada 'destacada'")
+    if sum(1 for n in notas if n.get("portada") == "lateral") != 2:
+        raise ValueError("Debe haber exactamente dos notas con portada 'lateral'")
+
+
+def tarjeta(n, sangria, clase, encabezado):
+    i = " " * sangria
+    lineas = [f'{i}<div class="{clase}" data-topic="{n["tema"]}" data-search="{n["buscar"]}">',
+              f'{i}  <div class="meta">']
+    if n.get("tag"):
+        lineas.append(f'{i}    <span class="tag">{n["tag"]}</span>')
+    lineas += [f'{i}    <span>{parte}</span>' for parte in n["meta"].split(SEPARADOR)]
+    lineas += [f'{i}  </div>',
+               f'{i}  <{encabezado}><a href="{n["href"]}">{n["titulo"]}</a></{encabezado}>',
+               f'{i}  <p>{n["resumen"]}</p>',
+               f'{i}  <a class="read-more" href="{n["href"]}">Leer noticia →</a>',
+               f'{i}</div>']
+    return "\n".join(lineas)
+
+
+def render_portada(notas):
+    destacada = next(n for n in notas if n.get("portada") == "destacada")
+    laterales = [n for n in notas if n.get("portada") == "lateral"]
+    return ('  <section class="hero" aria-label="Noticias destacadas">\n'
+            + tarjeta(destacada, 4, "feature", "h2") + "\n\n"
+            + '    <div class="hero-side">\n'
+            + "\n\n".join(tarjeta(n, 6, "news-card", "h3") for n in laterales) + "\n"
+            + "    </div>\n"
+            + "  </section>")
+
+
+def ordenar_lo_ultimo(notas):
+    # Orden estable: a igual fecha, se conserva el orden de data/articulos.json.
+    resto = [n for n in notas if not n.get("portada")]
+    return sorted(resto, key=lambda n: fecha_movimiento(n["meta"]), reverse=True)
+
+
+def render_lo_ultimo(notas):
+    return "\n\n".join(tarjeta(n, 8, "news-card", "h3") for n in ordenar_lo_ultimo(notas))
 
 
 def render_archivo(notas):
     grupos = {}
     for n in notas:
-        grupos.setdefault(mes_publicacion(n["meta"]), []).append(n)
+        anio, mes, _ = fecha_movimiento(n["meta"])
+        grupos.setdefault((anio, mes), []).append(n)
     bloques = []
     for (anio, mes) in sorted(grupos, reverse=True):
         items = grupos[(anio, mes)]
@@ -62,7 +116,18 @@ def render_archivo(notas):
     return cabecera + "\n\n".join(bloques) + "\n  </section>"
 
 
-def reemplazar(html, nuevo_archivo, total):
+def reemplazar_bloque(html, nombre, contenido):
+    patron = re.compile(
+        rf"^([ ]*)<!-- BEGIN:{nombre} -->\n.*?^[ ]*<!-- END:{nombre} -->", re.M | re.S)
+    html, n = patron.subn(
+        lambda m: f"{m.group(1)}<!-- BEGIN:{nombre} -->\n{contenido}\n{m.group(1)}<!-- END:{nombre} -->",
+        html, count=1)
+    if n != 1:
+        raise ValueError(f"Falta el bloque <!-- BEGIN:{nombre} --> ... <!-- END:{nombre} --> en index.html")
+    return html
+
+
+def reemplazar_archivo_y_contador(html, nuevo_archivo, total):
     html, n1 = re.subn(r'<section class="archive" id="archivo">.*?</section>',
                        lambda _: nuevo_archivo, html, count=1, flags=re.S)
     html, n2 = re.subn(r'(<p id="result-count" aria-live="polite">)[^<]*(</p>)',
@@ -72,11 +137,17 @@ def reemplazar(html, nuevo_archivo, total):
     return html
 
 
+def generar(html, notas):
+    html = reemplazar_bloque(html, "portada", render_portada(notas))
+    html = reemplazar_bloque(html, "lo-ultimo", render_lo_ultimo(notas))
+    return reemplazar_archivo_y_contador(html, render_archivo(notas), len(notas))
+
+
 def main():
     notas = json.loads(DATOS.read_text(encoding="utf-8"))["notas"]
     validar(notas)
     actual = INDEX.read_text(encoding="utf-8")
-    nuevo = reemplazar(actual, render_archivo(notas), len(notas))
+    nuevo = generar(actual, notas)
     if "--check" in sys.argv:
         if nuevo != actual:
             print("index.html NO coincide con data/articulos.json. Ejecuta el script sin --check.")
