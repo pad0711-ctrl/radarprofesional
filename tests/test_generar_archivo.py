@@ -13,6 +13,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 import generar_archivo as g  # noqa: E402
 
 NOTAS = json.loads((RAIZ / "data" / "articulos.json").read_text(encoding="utf-8"))["notas"]
+HERRAMIENTAS = json.loads((RAIZ / "data" / "herramientas.json").read_text(encoding="utf-8"))["herramientas"]
 INDEX_HTML = (RAIZ / "index.html").read_text(encoding="utf-8")
 HTML_MINIMO = ('<p id="result-count" aria-live="polite">0</p>\n'
                '<section class="archive" id="archivo">\n  </section>')
@@ -81,3 +82,46 @@ class IndexActual(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Herramientas(unittest.TestCase):
+    def test_render_incluye_enlaces_y_descripcion(self):
+        salida = g.render_herramientas(HERRAMIENTAS)
+        self.assertIn("<summary>Herramientas</summary>", salida)
+        for h in HERRAMIENTAS:
+            self.assertIn(f'<a href="{h["href"]}">{h["titulo"]}</a>', salida)
+            self.assertIn(f'<small>{h["descripcion"]}</small>', salida)
+
+    def test_ampersand_se_escapa(self):
+        h = [{"href": "/x/", "titulo": "Impuestos & aduanas", "descripcion": "d"}]
+        self.assertIn("Impuestos &amp; aduanas", g.render_herramientas(h))
+
+    def test_ruta_relativa_se_rechaza(self):
+        h = [{"href": "calendario/", "titulo": "t", "descripcion": "d"}]
+        with self.assertRaises(ValueError):
+            g.validar_herramientas(h)
+
+    def test_index_actual_tiene_marcadores(self):
+        self.assertIn("<!-- BEGIN:herramientas -->", INDEX_HTML)
+        self.assertIn("<!-- END:herramientas -->", INDEX_HTML)
+
+
+class Sitemap(unittest.TestCase):
+    def test_incluye_home_herramientas_y_todas_las_notas(self):
+        salida = g.render_sitemap(NOTAS, HERRAMIENTAS)
+        self.assertIn(f"<loc>{g.BASE}/</loc>", salida)
+        for h in HERRAMIENTAS:
+            self.assertIn(f"<loc>{g.BASE}{h['href']}</loc>", salida)
+        for n in NOTAS:
+            self.assertIn(f"<loc>{g.url_absoluta(n['href'])}</loc>", salida)
+
+    def test_sitemap_versionado_coincide_con_los_datos(self):
+        generado = g.render_sitemap(NOTAS, HERRAMIENTAS)
+        actual = (RAIZ / "sitemap.xml").read_text(encoding="utf-8")
+        self.assertEqual(generado, actual)
+
+    def test_url_repetida_entre_notas_y_herramientas_falla(self):
+        herr = [{"href": NOTAS[0]["href"], "titulo": "t", "descripcion": "d"}]
+        with self.assertRaises(ValueError):
+            g.render_sitemap(NOTAS, herr)
+
