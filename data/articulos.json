@@ -2,6 +2,16 @@
   "_nota": "Fuente de verdad de index.html y del archivo. 'portada' marca la nota destacada (una) o laterales (dos); el resto sale en 'Lo último' ordenado por la fecha más reciente. 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
+      "href": "https://radarprofesional.online/actualidad/decreto-1226-2026-plazos-renta-sismo/",
+      "titulo": "Decreto 1226 de 2026: plazos de renta por el terremoto del 10 de agosto",
+      "meta": "Fecha de la fuente: 18 agosto 2026 · Publicada en el sitio: 1 noviembre 2026",
+      "tema": "Impuestos",
+      "buscar": "decreto 1226 2026 renta personas naturales sismo terremoto plazos NIT seccionales Cali Pereira Armenia Manizales Popayán Quibdó Tuluá Palmira Buenaventura retención julio",
+      "resumen": "Plazos especiales de renta de personas naturales (AG 2025) para domicilio en municipios afectados por el sismo. Vencen por NIT entre el 3 y el 13 de noviembre.",
+      "tag": "Impuestos",
+      "vence": "2026-11-13"
+    },
+    {
       "href": "https://radarprofesional.online/actualidad/dian-factura-electronica-errores-2026/",
       "titulo": "Factura electrónica con errores o compra no reconocida: qué hacer según la DIAN",
       "meta": "Fecha de la fuente: 29 octubre 2026 · Publicada en el sitio: 31 octubre 2026",
