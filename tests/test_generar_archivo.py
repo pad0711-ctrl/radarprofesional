@@ -157,5 +157,93 @@ class Plazos(unittest.TestCase):
         self.assertEqual(len(con_plazo), 5)
 
 
+class Portada(unittest.TestCase):
+    HOY = date(2026, 11, 1)
+
+    @staticmethod
+    def slug(n):
+        return n["href"].rstrip("/").split("/")[-1] + "/"
+
+    @staticmethod
+    def limpia(notas):
+        out = []
+        for n in notas:
+            m = {k: v for k, v in n.items() if k not in ("vence", "portada")}
+            out.append(m)
+        return out
+
+    @staticmethod
+    def con_vence(notas, asignaciones):
+        """asignaciones: {sufijo_de_href: 'AAAA-MM-DD'}"""
+        for n in notas:
+            for suf, fecha in asignaciones.items():
+                if n["href"].endswith(suf):
+                    n["vence"] = fecha
+        return notas
+
+    def test_orden_por_fecha_limite(self):
+        notas = self.con_vence(self.limpia(NOTAS), {
+            "dian-sanciones-cambiarias-decreto-1419-2026/": "2026-11-19",
+            "mincit-antidumping-laminado-india-2026/": "2026-11-05",
+            "decreto-1226-2026-plazos-renta-sismo/": "2026-11-13"})
+        orden = [self.slug(n) for n in g.vencimientos_abiertos(notas, self.HOY)]
+        self.assertEqual(orden, [
+            "mincit-antidumping-laminado-india-2026/",
+            "decreto-1226-2026-plazos-renta-sismo/",
+            "dian-sanciones-cambiarias-decreto-1419-2026/"])
+
+    def test_empate_se_resuelve_por_fecha_de_movimiento(self):
+        notas = self.con_vence(self.limpia(NOTAS), {
+            "bogota-exogena-2025-2026-09-26/": "2026-11-05",
+            "mincit-antidumping-laminado-india-2026/": "2026-11-05"})
+        orden = [self.slug(n) for n in g.vencimientos_abiertos(notas, self.HOY)]
+        # antidumping se movió el 31 oct; exógena el 21 oct: la más reciente va primero
+        self.assertEqual(orden, ["mincit-antidumping-laminado-india-2026/",
+                                 "bogota-exogena-2025-2026-09-26/"])
+
+    def test_plazo_vencido_no_aparece_en_la_agenda(self):
+        notas = self.con_vence(self.limpia(NOTAS), {"mincit-antidumping-laminado-india-2026/": "2026-10-31"})
+        self.assertNotIn("mincit-antidumping-laminado-india-2026/",
+                         g.render_portada(notas, self.HOY))
+        self.assertTrue(any(n["href"].endswith("mincit-antidumping-laminado-india-2026/")
+                            for n in g.ordenar_lo_ultimo(notas, self.HOY)))
+
+    def test_vence_hoy_si_aparece(self):
+        notas = self.con_vence(self.limpia(NOTAS), {"mincit-antidumping-laminado-india-2026/": "2026-11-01"})
+        self.assertIn("mincit-antidumping-laminado-india-2026/", g.render_portada(notas, self.HOY))
+
+    def test_nota_con_plazo_abierto_no_se_repite_en_lo_ultimo(self):
+        notas = self.con_vence(self.limpia(NOTAS), {"mincit-antidumping-laminado-india-2026/": "2026-11-05"})
+        lo_ultimo = g.render_lo_ultimo(notas, self.HOY)
+        self.assertNotIn("mincit-antidumping-laminado-india-2026/", lo_ultimo)
+        self.assertIn("mincit-antidumping-laminado-india-2026/", g.render_portada(notas, self.HOY))
+
+    def test_sin_plazos_abiertos_muestra_mensaje_y_enlace(self):
+        salida = g.render_portada(self.limpia(NOTAS), self.HOY)
+        self.assertIn("No hay plazos abiertos en este momento.", salida)
+        self.assertIn('href="/calendario-tributario-2026/"', salida)
+        self.assertNotIn("<ol", salida)
+
+    def test_fecha_larga_en_la_agenda(self):
+        notas = self.con_vence(self.limpia(NOTAS), {"mincit-antidumping-laminado-india-2026/": "2026-11-05"})
+        salida = g.render_portada(notas, self.HOY)
+        self.assertIn('<time datetime="2026-11-05">5 de noviembre de 2026</time>', salida)
+
+    def test_no_hay_nota_destacada(self):
+        salida = g.render_portada(NOTAS, self.HOY)
+        self.assertNotIn('class="feature"', salida)
+        self.assertNotIn("hero", salida)
+
+    def test_campo_portada_viejo_no_falla(self):
+        notas = copy.deepcopy(NOTAS)
+        notas[0]["portada"] = "destacada"
+        g.validar(notas)
+
+    def test_vence_invalido_falla(self):
+        notas = self.con_vence(self.limpia(NOTAS), {"mincit-antidumping-laminado-india-2026/": "5/11/2026"})
+        with self.assertRaises(ValueError):
+            g.validar(notas)
+
+
 if __name__ == "__main__":
     unittest.main()

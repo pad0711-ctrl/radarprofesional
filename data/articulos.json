@@ -1,5 +1,5 @@
 {
-  "_nota": "Fuente de verdad de index.html y del archivo. 'portada' marca la nota destacada (una) o laterales (dos); el resto sale en 'Lo último' ordenado por la fecha más reciente. 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
+  "_nota": "Fuente de verdad de index.html y del archivo. La portada es automática: arriba 'Próximos vencimientos' (notas con 'vence' igual o posterior a hoy, por fecha límite) y debajo 'Lo último' (el resto, por fecha de movimiento más reciente). 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
       "href": "https://radarprofesional.online/actualidad/decreto-1226-2026-plazos-renta-sismo/",
@@ -74,8 +74,7 @@
       "tag": "Economía",
       "tema": "Economía",
       "buscar": "DANE registra una leve caída de la actividad económica en agosto: qué revisar desde finanzas y auditoría Finanzas y análisis económico",
-      "resumen": "El DANE publicó el 19 de octubre los resultados preliminares del Indicador de Seguimiento a la Economía (ISE) correspondientes a agosto de 2026.",
-      "portada": "lateral"
+      "resumen": "El DANE publicó el 19 de octubre los resultados preliminares del Indicador de Seguimiento a la Economía (ISE) correspondientes a agosto de 2026."
     },
     {
       "href": "https://radarprofesional.online/actualidad/dian-bogotaeats-control-facturacion-electronica-2026/",
@@ -84,8 +83,7 @@
       "tag": "Impuestos",
       "tema": "Impuestos",
       "buscar": "DIAN revisó facturación en BogotáEats: lecciones de control para comercios y auditores Tributación y control fiscal",
-      "resumen": "La DIAN informó el 20 de octubre que realizó verificaciones de factura electrónica y documento equivalente electrónico durante BogotáEats a Cielo Abierto, celebrado los días 16 y 17 de octubre de 2026.",
-      "portada": "lateral"
+      "resumen": "La DIAN informó el 20 de octubre que realizó verificaciones de factura electrónica y documento equivalente electrónico durante BogotáEats a Cielo Abierto, celebrado los días 16 y 17 de octubre de 2026."
     },
     {
       "href": "https://radarprofesional.online/actualidad/superfinanciera-muric-validacion-132-octubre-2026/",
@@ -203,7 +201,6 @@
       "tema": "Impuestos",
       "buscar": "Bogotá cambia el calendario de información exógena: vencimientos del 26 de octubre al 5 de noviembre Bogotá · Información exógena",
       "resumen": "La Resolución DDI-042682 del 19 de octubre de 2026 modifica el artículo 28 de la Resolución DDI-024115. El calendario de entrega de información exógena distrital pasa al periodo del 26 de octubre al 5 de noviembre de 2026, según el último dígito de identificación.",
-      "portada": "destacada",
       "vence": "2026-11-05"
     },
     {

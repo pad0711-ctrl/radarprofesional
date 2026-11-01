@@ -18,7 +18,6 @@ Campos de cada nota:
 - `tema`: valor de `data-topic` (filtro del buscador). Obligatorio.
 - `buscar`: texto del buscador (`data-search`). Obligatorio.
 - `resumen`: párrafo de la tarjeta. Obligatorio.
-- `portada`: `"destacada"` (una nota) o `"lateral"` (dos notas). Las demás van a "Lo último", ordenadas por la fecha de movimiento más reciente.
 - `vence` (opcional, AAAA-MM-DD): fecha límite de un plazo. La tarjeta muestra "Plazo: D mes AAAA" hasta ese día, "Plazo vencido: ..." durante 7 días después, y luego no muestra nada. La fecha se calcula con la hora de Bogotá cuando corre el workflow.
 
 Pruebas del script:
@@ -27,8 +26,10 @@ Pruebas del script:
 
 Herramientas: `herramientas.json` es la fuente del panel "Herramientas" del menú. Cada entrada lleva `href` (ruta absoluta del sitio), `titulo` y `descripcion`. Para agregar una herramienta, añádela ahí y ejecuta el script.
 
+Portada: arriba, "Próximos vencimientos" lista las notas con `vence` igual o posterior a hoy, por fecha límite. Debajo, "Lo último" muestra el resto, por fecha de movimiento más reciente; no hay nota destacada.
+
 Qué regenera el script:
-- index.html: portada (`BEGIN/END:portada`), "Lo último" (`BEGIN/END:lo-ultimo`), panel Herramientas (`BEGIN/END:herramientas`), archivo de publicaciones y contador.
+- index.html: portada de vencimientos (`BEGIN/END:portada`), "Lo último" (`BEGIN/END:lo-ultimo`), panel Herramientas (`BEGIN/END:herramientas`), archivo de publicaciones y contador.
 - sitemap.xml: página de inicio, herramientas y todas las notas.
 
 No editar esas partes a mano en index.html ni sitemap.xml: el script las sobrescribe.
