@@ -2,6 +2,15 @@
   "_nota": "Fuente de verdad de index.html y del archivo. La portada es automática: arriba 'Próximos vencimientos' (notas con 'vence' igual o posterior a hoy, por fecha límite) y debajo 'Lo último' (el resto, por fecha de movimiento más reciente). 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
+      "href": "https://radarprofesional.online/actualidad/decreto-898-2026-interes-presunto-inflacion/",
+      "titulo": "Decreto 898 de 2026: interés presunto y componente inflacionario de 2025 y 2026",
+      "meta": "Fecha de la fuente: 29 julio 2026 · Publicada en el sitio: 2 noviembre 2026",
+      "tema": "Impuestos",
+      "tag": "Impuestos",
+      "resumen": "Decreto 898 de 2026: rendimiento mínimo de 9,09 % en préstamos entre sociedades y socios para 2026, y componente inflacionario de 2025 para personas naturales no obligadas a llevar libros.",
+      "buscar": "Decreto 898 de 2026 interés presunto componente inflacionario renta 2025 2026 préstamos socios DTF 9,09 % 55,43 % 28,35 % diferencia en cambio personas naturales"
+    },
+    {
       "href": "https://radarprofesional.online/actualidad/decreto-1226-2026-plazos-renta-sismo/",
       "titulo": "Decreto 1226 de 2026: plazos de renta por el terremoto del 10 de agosto",
       "meta": "Fecha de la fuente: 18 agosto 2026 · Publicada en el sitio: 1 noviembre 2026",
