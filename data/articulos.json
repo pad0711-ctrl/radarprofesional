@@ -2,6 +2,15 @@
   "_nota": "Fuente de verdad de index.html y del archivo. La portada es automática: arriba 'Próximos vencimientos' (notas con 'vence' igual o posterior a hoy, por fecha límite) y debajo 'Lo último' (el resto, por fecha de movimiento más reciente). 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
+      "href": "https://radarprofesional.online/actualidad/supertransporte-res-9596-2026-aliado-tecnologico-sarlaft/",
+      "titulo": "Resolución 9596 de 2026: aliados tecnológicos para reportar SARLAFT y RMS en Supertransporte",
+      "meta": "Fecha de la fuente: 29 julio 2026 · Publicada en el sitio: 3 noviembre 2026",
+      "tema": "SARLAFT",
+      "tag": "SARLAFT",
+      "resumen": "La Supertransporte permite designar un aliado tecnológico, de forma opcional, para cargar reportes SARLAFT y RMS. La responsabilidad no se transfiere al sujeto obligado.",
+      "buscar": "Resolución 9596 de 2026 Supertransporte aliado tecnológico SARLAFT RMS SINST-VIGÍA 2 UIAF revisor fiscal ROS reportes objetivos"
+    },
+    {
       "href": "https://radarprofesional.online/actualidad/decreto-898-2026-interes-presunto-inflacion/",
       "titulo": "Decreto 898 de 2026: interés presunto y componente inflacionario de 2025 y 2026",
       "meta": "Fecha de la fuente: 29 julio 2026 · Publicada en el sitio: 2 noviembre 2026",
