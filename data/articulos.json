@@ -2,6 +2,15 @@
   "_nota": "Fuente de verdad de index.html y del archivo. La portada es automática: arriba 'Próximos vencimientos' (notas con 'vence' igual o posterior a hoy, por fecha límite) y debajo 'Lo último' (el resto, por fecha de movimiento más reciente). 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
+      "href": "https://radarprofesional.online/actualidad/proyecto-ley-477-2026-rescate-economico/",
+      "titulo": "Proyecto de Ley 477 de 2026 Cámara: el Ministerio de Hacienda radicó la Ley de Rescate Económico",
+      "meta": "Fecha de la fuente: 29 octubre 2026 · Publicada en el sitio: 9 noviembre 2026",
+      "tema": "Tributario",
+      "tag": "Tributario",
+      "resumen": "Proyecto de ley 477 de 2026 Cámara, Ley de Rescate Económico: radicado por el Ministerio de Hacienda, en trámite y sin efecto de norma vigente.",
+      "buscar": "Proyecto de Ley 477 de 2026 Cámara Ley de Rescate Económico Ministerio de Hacienda Comisión Tercera balance primario deuda neta IVA reducción del Estado"
+    },
+    {
       "href": "https://radarprofesional.online/actualidad/supertransporte-circular-20265330000164-reporte-sarlaft-2027/",
       "titulo": "Circular 20265330000164 de 2026: Supertransporte fija al 10 de abril de 2027 el primer reporte SARLAFT y RMS 2026",
       "meta": "Fecha de la fuente: 7 octubre 2026 · Publicada en el sitio: 4 noviembre 2026",
