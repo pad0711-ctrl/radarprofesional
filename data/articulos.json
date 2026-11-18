@@ -2,6 +2,15 @@
   "_nota": "Fuente de verdad de index.html y del archivo. La portada es automática: arriba 'Próximos vencimientos' (notas con 'vence' igual o posterior a hoy, por fecha límite) y debajo 'Lo último' (el resto, por fecha de movimiento más reciente). 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
+      "href": "https://radarprofesional.online/actualidad/dian-res-33-2026-exogena-excedentes-donaciones/",
+      "titulo": "DIAN modifica la información exógena: entidades no contribuyentes reportan excedentes contables y donaciones",
+      "meta": "Fecha de la fuente: 30 octubre 2026 · Publicada en el sitio: 17 noviembre 2026",
+      "tema": "Tributario",
+      "tag": "Tributario",
+      "resumen": "La DIAN modifica la información exógena: las entidades no contribuyentes reportan excedentes contables en los formatos 2834 y 2835, y el formato de donaciones 2575 cambia.",
+      "buscar": "DIAN Resolución 000033 2026 información exógena excedentes contables donaciones formato 2834 2835 2575 entidades no contribuyentes artículo 23 Estatuto Tributario"
+    },
+    {
       "href": "https://radarprofesional.online/actualidad/proyecto-ley-477-2026-rescate-economico/",
       "titulo": "Proyecto de Ley 477 de 2026 Cámara: el Ministerio de Hacienda radicó la Ley de Rescate Económico",
       "meta": "Fecha de la fuente: 29 octubre 2026 · Publicada en el sitio: 11 noviembre 2026",
