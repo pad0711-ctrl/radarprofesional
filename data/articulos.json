@@ -2,6 +2,15 @@
   "_nota": "Fuente de verdad de index.html y del archivo. La portada es automática: arriba 'Próximos vencimientos' (notas con 'vence' igual o posterior a hoy, por fecha límite) y debajo 'Lo último' (el resto, por fecha de movimiento más reciente). 'tag', 'tema', 'buscar' y 'resumen' alimentan las tarjetas. 'buscar' es el texto del buscador (data-search).",
   "notas": [
     {
+      "href": "https://radarprofesional.online/actualidad/dian-res-000036-2026-comites-conciliacion/",
+      "titulo": "DIAN crea comités especiales de conciliación en Grandes Contribuyentes y seccionales de impuestos, aduanas e impuestos y aduanas",
+      "meta": "Fecha de la fuente: 10 noviembre 2026 · Publicada en el sitio: 19 noviembre 2026",
+      "tema": "Tributario",
+      "tag": "Tributario",
+      "resumen": "La DIAN crea comités especiales de conciliación en Grandes Contribuyentes y en las seccionales de impuestos, aduanas e impuestos y aduanas, mediante la Resolución 000036 de 2026.",
+      "buscar": "DIAN Resolución 000036 2026 comités especiales de conciliación Grandes Contribuyentes seccionales impuestos aduanas conciliación contencioso administrativa desistimiento artículo 17 CPACA"
+    },
+    {
       "href": "https://radarprofesional.online/actualidad/dian-res-33-2026-exogena-excedentes-donaciones/",
       "titulo": "DIAN modifica la información exógena: entidades no contribuyentes reportan excedentes contables y donaciones",
       "meta": "Fecha de la fuente: 30 octubre 2026 · Publicada en el sitio: 17 noviembre 2026",
